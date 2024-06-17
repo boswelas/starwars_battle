@@ -14,14 +14,17 @@ class Character:
         self.health = self.calculate_health()  
 
     def effective_attack(self):
-        return (self.base_atk + self.max_atk) / 2
+        # Return a random value between base_atk and max_atk
+        return random.uniform(self.base_atk, self.max_atk)
 
     def effective_defense(self):
-        return (self.base_def + self.max_def) / 2
+        # Return a random value between base_def and max_def
+        return random.uniform(self.base_def, self.max_def)
 
     def attack_hits(self, opponent):
-        hit_chance = self.acc - opponent.eva
-        return random.randint(0, 100) < hit_chance
+        # Calculate hit chance based on accuracy and opponent's evasion with some randomness
+        hit_chance = self.acc - opponent.eva + random.uniform(-10, 10)
+        return random.uniform(0, 100) < hit_chance
 
     def take_damage(self, damage):
         self.health -= damage
