@@ -5,6 +5,8 @@ import { Character } from './lib/types';
 import SearchBar from './components/search-bar';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import Image from 'next/image'
+import GetCharacterDetails from './components/character-details'
+
 
 export default function CharacterPage() {
   const [characters, setCharacters] = useState<string[] | null>(null);
@@ -12,17 +14,8 @@ export default function CharacterPage() {
   const [selectedCharName, setSelectedCharName] = useState("");
   const [characterDetails, setCharacterDetails] = useState<Character | null>(null);
 
-  const onSelectionChange: (value: string | null) => void = (newValue) => {
-    setSelectedCharName(newValue!);
-  };
-
   const onInputChange = (value: string) => {
     setSelectedCharName(value!)
-  };
-
-
-  const handleInputChange = (value: string) => {
-    setSelectedCharName(value);
   };
 
   useEffect(() => {
@@ -80,28 +73,13 @@ export default function CharacterPage() {
               ))}
             </Autocomplete>
           </div>
-          {/* <SearchBar names={characters} onChange={handleInputChange} /> */}
           {characterDetails && (
-            <div>
-              <h2>Character Details</h2>
-              <p>Name: {characterDetails.name}</p>
-              <p>Image: <Image src={characterDetails.image} alt={characterDetails.name} width={200}
-                height={200} /></p>
-              <p>Range: {characterDetails.range}</p>
-              <p>Base ATK: {characterDetails.base_atk}</p>
-              <p>Base DEF: {characterDetails.base_def}</p>
-              <p>Max ATK: {characterDetails.max_atk}</p>
-              <p>Max DEF: {characterDetails.max_def}</p>
-              <p>ACC: {characterDetails.acc}</p>
-              <p>EVA: {characterDetails.eva}</p>
-            </div>
+            <GetCharacterDetails characterDetails={characterDetails} />
           )}
         </div>
       )}
     </div>
   );
 }
-function setSelectedCharName(charName: string) {
-  throw new Error('Function not implemented.');
-}
+
 
