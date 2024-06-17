@@ -36,5 +36,37 @@ async def get_character():
 
     return jsonify(data=char_data_dict)
 
+
+@app.route('/fetch_all_char', methods=['GET'])
+async def fetch_characters():
+    try:
+        await db.connect()
+        char_data = await db.character.find_many()
+        char_names = [char.name for char in char_data] 
+    except Exception as e:
+        print(f"Error retrieving all characters: {e}")
+        return jsonify(error="Internal server error"), 500
+    finally:
+        await db.disconnect()
+    return jsonify(char_names)  
+
+@app.route('/fetch_char', methods=['GET'])
+async def fetch_character(name):
+    try:
+        await db.connect()
+        char_data = await db.character.find_first(
+            where={
+                'name':name
+            }
+        )
+    except Exception as e:
+        print(f"Error retrieving all characters: {e}")
+        return jsonify(error="Internal server error"), 500
+    finally:
+        await db.disconnect()
+    print(char_data)
+    return jsonify(char_data) 
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
