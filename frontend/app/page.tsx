@@ -1,18 +1,41 @@
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import SearchBar from './components/search-bar';
-import BattleButton from './components/battle-button'
 
 export default function CharacterPage() {
-  return (
-    <div className='h-screen flex flex-col items-center'>
-      <h1 className='mt-10 text-2xl font-semibold'>Star Wars Character Battle</h1>
-      <div><BattleButton /></div>
-      <div className='flex flex-row gap-10 mt-10'>
-        <SearchBar />
-        <SearchBar />
-      </div>
+  const [character1, setCharacter1] = useState<string>('');
+  const [character2, setCharacter2] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const router = useRouter();
 
+  const handleBattle = () => {
+    if (character1 && character2) {
+      router.push(`/battle?character1=${encodeURIComponent(character1)}&character2=${encodeURIComponent(character2)}`);
+    } else {
+      setError('Both characters must be selected before starting the battle.');
+    }
+  };
+
+  return (
+    <div className='flex flex-col items-center min-h-screen'>
+      <h1 className='mt-10 text-2xl font-semibold'>
+        Star Wars Character Battle
+      </h1>
+
+      <div className='flex items-center justify-center'>
+        <button
+          className="mt-3 primary-btn h-10 text-lg bg-red-600 p-3 rounded-2xl font-semibold flex items-center justify-center"
+          onClick={handleBattle}
+        >
+          Battle
+        </button>
+      </div>
+      {error && <p className="text-red-600 mt-2">{error}</p>}
+      <div className='flex flex-row gap-10 mt-10'>
+        <SearchBar onSelect={setCharacter1} />
+        <SearchBar onSelect={setCharacter2} />
+      </div>
     </div>
   );
 }
-
-
