@@ -3,26 +3,26 @@ import React, { useState, useEffect } from 'react';
 import { fetchAllCharacters, fetchCharacter } from './lib/api';
 import { Character } from './lib/types';
 import SearchBar from './components/search-bar';
+import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 
 
 export default function CharacterPage() {
   const [characters, setCharacters] = useState<string[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCharName, setSelectedCharName] = useState<string | null>(null);
+  const [selectedCharName, setSelectedCharName] = useState("");
   const [characterDetails, setCharacterDetails] = useState<Character | null>(null);
+
+  const onSelectionChange: (value: string | null) => void = (newValue) => {
+    setSelectedCharName(newValue!);
+  };
+
+  const onInputChange = (value: string) => {
+    setSelectedCharName(value!)
+  };
+
 
   const handleInputChange = (value: string) => {
     setSelectedCharName(value);
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    // Handle form submission with inputValue
-    console.log('Submitted value:', selectedCharName);
-    // Reset form state if needed
-    const character = await fetchCharacter(selectedCharName!);
-    const charDetails = character.data;
-    setCharacterDetails(charDetails!);
   };
 
   useEffect(() => {
@@ -42,15 +42,17 @@ export default function CharacterPage() {
 
   useEffect(() => {
     if (selectedCharName) {
+      console.log("char is ", selectedCharName)
       const fetchCharacterData = async () => {
         try {
           const result = await fetchCharacter(selectedCharName);
-          setCharacterDetails(result.data || null);
+          setCharacterDetails(result!.data!);
           console.log(characterDetails)
           setError(null);
         } catch (error: any) {
           setError(error.message);
           setCharacterDetails(null);
+          console.log("set char deets null")
         }
       };
 
@@ -59,16 +61,26 @@ export default function CharacterPage() {
   }, [selectedCharName]);
 
 
-
   return (
     <div className='h-screen'>
       <h1>Fetch Character Data</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {characters && (
         <div>
-          <form onSubmit={handleSubmit}>
-            <SearchBar names={characters} onChange={handleInputChange} />
-          </form>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 text-black">
+            <Autocomplete
+              label="Choose a character"
+              className="max-w-xs"
+              onInputChange={onInputChange}
+            >
+              {characters.map((name) => (
+                <AutocompleteItem key={name} value={name} className="text-black">
+                  {name}
+                </AutocompleteItem>
+              ))}
+            </Autocomplete>
+          </div>
+          {/* <SearchBar names={characters} onChange={handleInputChange} /> */}
           {characterDetails && (
             <div>
               <h2>Character Details</h2>
