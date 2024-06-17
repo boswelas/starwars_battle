@@ -8,7 +8,7 @@ interface GetCharacterDetailsProps {
 
 export default function GetCharacterDetails({ characterDetails }: GetCharacterDetailsProps) {
     return (
-        <div>
+        <div className='mt-3'>
             <h2>Character Details</h2>
             <p>Name: {characterDetails.name}</p>
             <p>Image: <Image src={characterDetails.image} alt={characterDetails.name} width={200}
