@@ -1,6 +1,6 @@
 datasource db {
-    provider = "postgres"
-    url      = env("DB_URL")
+    provider = "sqlite"
+    url      = "file:dev.db"
 }
 
 generator db {
@@ -10,8 +10,8 @@ generator db {
 }
 
 model Character {
-    id       Int @id @default(autoincrement())
-    name     String
+    id       Int    @id @default(autoincrement())
+    name     String @unique
     image    String
     range    String
     base_atk Int
