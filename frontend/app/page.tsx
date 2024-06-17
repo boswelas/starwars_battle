@@ -4,6 +4,7 @@ import { fetchAllCharacters, fetchCharacter } from './lib/api';
 import { Character } from './lib/types';
 import SearchBar from './components/search-bar';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
+import { revalidatePath } from 'next/cache';
 
 
 export default function CharacterPage() {
