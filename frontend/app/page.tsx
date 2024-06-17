@@ -4,8 +4,7 @@ import { fetchAllCharacters, fetchCharacter } from './lib/api';
 import { Character } from './lib/types';
 import SearchBar from './components/search-bar';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
-import { revalidatePath } from 'next/cache';
-
+import Image from 'next/image'
 
 export default function CharacterPage() {
   const [characters, setCharacters] = useState<string[] | null>(null);
@@ -86,7 +85,8 @@ export default function CharacterPage() {
             <div>
               <h2>Character Details</h2>
               <p>Name: {characterDetails.name}</p>
-              <p>Image: <img src={characterDetails.image} alt={characterDetails.name} /></p>
+              <p>Image: <Image src={characterDetails.image} alt={characterDetails.name} width={200}
+                height={200} /></p>
               <p>Range: {characterDetails.range}</p>
               <p>Base ATK: {characterDetails.base_atk}</p>
               <p>Base DEF: {characterDetails.base_def}</p>
