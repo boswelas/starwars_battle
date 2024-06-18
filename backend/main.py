@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from prisma import Prisma
+from battle_calculator import battle
+
 
 app = Flask(__name__)
 CORS(app)
@@ -48,6 +50,31 @@ async def fetch_character():
         await db.disconnect()
     print(char_data_dict)
     return jsonify(data=char_data_dict)
+
+@app.route('/character_battle', methods=['GET'])
+async def get_battle():
+    character1 = request.args.get('character1')
+    character2 = request.args.get('character2')
+
+    if not (character1 and character2):
+        return jsonify(error="Characters are required"), 400
+    try:
+        await db.connect()
+        char1_data = await db.character.find_first(where={'name': character1})
+        if not char1_data:
+            return jsonify(error="Character1 not found"), 404
+        char2_data = await db.character.find_first(where={'name': character2})
+        if not char2_data:
+            return jsonify(error="Character2 not found"), 404
+        calculate_battle = battle(char1_data, char2_data)
+
+    except Exception as e:
+        print(f"Error fetching characters: {e}")
+        return jsonify(error="Internal server error"), 500
+    finally:
+        await db.disconnect()
+    print(calculate_battle)
+    return jsonify(data=calculate_battle)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,33 @@
 from character import Character
 import random
 
-def battle(character1, character2):
+def battle(character1_data, character2_data):
+    character1 = Character(
+        name=character1_data.name,
+        image=character1_data.image,
+        range=character1_data.range,
+        base_atk=character1_data.base_atk,
+        base_def=character1_data.base_def,
+        max_atk=character1_data.max_atk,
+        max_def=character1_data.max_def,
+        acc=character1_data.acc,
+        eva=character1_data.eva
+    )
+
+    character2 = Character(
+        name=character2_data.name,
+        image=character2_data.image,
+        range=character2_data.range,
+        base_atk=character2_data.base_atk,
+        base_def=character2_data.base_def,
+        max_atk=character2_data.max_atk,
+        max_def=character2_data.max_def,
+        acc=character2_data.acc,
+        eva=character2_data.eva
+    )
+    
+    battle_play = []
+
     speed1 = character1.calculate_speed()
     speed2 = character2.calculate_speed()
 
@@ -22,24 +48,23 @@ def battle(character1, character2):
             critical_hit = random.random() < 0.1  # 10% chance of critical hit
             if critical_hit:
                 damage *= 1.5
-                print(f"Critical hit!")
+                battle_play.append(f"Critical hit!")
             defender.take_damage(damage)
-            print(f"{attacker.name} hits {defender.name} for {damage:.2f} damage. {defender.name}'s health is now {defender.health:.2f}.")
+            battle_play.append(f"{attacker.name} hits {defender.name} for {damage:.2f} damage. {defender.name}'s health is now {defender.health:.2f}.")
         else:
-            print(f"{attacker.name} misses {defender.name}.")
+            battle_play.append(f"{attacker.name} misses {defender.name}.")
 
         turn += 1
 
     if character1.health > 0:
-        print(f"{character1.name} wins!")
-        return character1
+        battle_play.append(f"{character1.name} wins!")
     else:
-        print(f"{character2.name} wins!")
-        return character2
+        battle_play.append(f"{character2.name} wins!")
+    return(battle_play)
 
-# Example characters with range
-char1 = Character(name="Luke Skywalker", image="luke.jpg", range="s", base_atk=6250, base_def=6300, max_atk=8550, max_def=8650, acc=170, eva=80)
-char2 = Character(name="Darth Vader", image="vader.jpg", range="s", base_atk=6590, base_def=6900, max_atk=9090, max_def=9000, acc=170, eva=80)
+# # Example characters with range
+# char1 = Character(name="Luke Skywalker", image="luke.jpg", range="s", base_atk=6250, base_def=6300, max_atk=8550, max_def=8650, acc=170, eva=80)
+# char2 = Character(name="Darth Vader", image="vader.jpg", range="s", base_atk=6590, base_def=6900, max_atk=9090, max_def=9000, acc=170, eva=80)
 
-# Simulate battle
-winner = battle(char1, char2)
+# # Simulate battle
+# winner = battle(char1, char2)
