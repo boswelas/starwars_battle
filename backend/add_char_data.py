@@ -1,5 +1,5 @@
 from prisma import Client as PrismaClient
-from char_data_scrape import get_char_data
+from backend.char_stats_scrape import get_char_data
 import asyncio
 
 db = PrismaClient()

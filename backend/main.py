@@ -1,3 +1,4 @@
+from backend.char_detail_scrape import get_char_details
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from prisma import Prisma
@@ -76,6 +77,20 @@ async def get_battle():
     print(calculate_battle)
     return jsonify(data=calculate_battle)
 
+@app.route('get_char_details', methods=['GET'])
+async def get_details():
+    char_name = request.args.get('char_name')
+
+    if not (char_name):
+        return jsonify(error="Character name is required"), 400
+    try:
+        char_details = get_char_details(char_name)
+
+    except Exception as e:
+        print(f"Error fetching character: {e}")
+        return jsonify(error="Internal server error"), 500
+
+    return jsonify(data=char_details)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
