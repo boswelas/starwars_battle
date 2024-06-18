@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import GetCharacterDetails from './character-details';
-import { Character } from '../lib/types';
 import { fetchAllCharacters, fetchCharacterDetails } from '../lib/api';
-
 
 interface SearchBarProps {
     onSelect: (value: string) => void;
@@ -17,9 +15,13 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
     const [characterDetails, setCharacterDetails] = useState<any | null>(null);
 
     const onInputChange = (value: string) => {
-        setSelectedCharName(value);
-        if (onSelect) {
-            onSelect(value);
+        if (characters && characters.includes(value)) {
+            setSelectedCharName(value);
+            if (onSelect) {
+                {
+                    onSelect(value);
+                }
+            }
         }
     };
 
