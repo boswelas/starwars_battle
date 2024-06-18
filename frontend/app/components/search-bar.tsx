@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import GetCharacterDetails from './character-details';
 import { fetchAllCharacters, fetchCharacterDetails } from '../lib/api';
+import Image from 'next/image';
+
 
 interface SearchBarProps {
     onSelect: (value: string) => void;
@@ -75,8 +77,16 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
                             ))}
                         </Autocomplete>
                     </div>
-                    {characterDetails && (
-                        <GetCharacterDetails characterDetails={characterDetails} />
+
+                    {characterDetails ? (
+                        <div className='mt-10'>
+                            <GetCharacterDetails characterDetails={characterDetails} />
+                        </div>
+                    ) : (
+                        <div className='flex flex-col items-center'>
+                            <div className='flex flex-col items-center justify-center mt-10 bg-gray-300 h-[16.5rem] w-[12.5rem] opacity-60 animate-pulse'>
+                                <Image className='opacity-60 animate-pulse' src={"/rebel.jpeg"} alt='/Rebel_Alliance_logo.png' width={190} height={266} ></Image>
+                            </div></div>
                     )}
                 </div>
             )}

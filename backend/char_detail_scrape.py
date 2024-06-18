@@ -1,4 +1,5 @@
 import asyncio
+import re
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 
@@ -11,14 +12,14 @@ async def get_char_details(name):
     url = f"https://starwars.fandom.com/wiki/{formatted_name}"
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch()  # Set headless=False for debugging
+        browser = await pw.chromium.launch()
         print("opened browser")
         page = await browser.new_page()
         print("new page")
         try:
-            await page.goto(url, wait_until='domcontentloaded', timeout=120000)  # Increase timeout to 120 seconds
+            await page.goto(url, wait_until='domcontentloaded')
             print("went to:", url)
-            await page.wait_for_selector('aside.portable-infobox', timeout=60000)  # Increase timeout to 60 seconds
+            await page.wait_for_selector('aside.portable-infobox')
             print("selector found")
         except Exception as e:
             print(f"Error during navigation or waiting for selector: {e}")
@@ -37,12 +38,18 @@ async def get_char_details(name):
             details = []
             sections = infobox.find_all("section", class_="pi-item")
             for section in sections:
-                label = section.find("h3", class_="pi-data-label")
-                value = section.find("div", class_="pi-data-value")
-                if label and value:
+                section_header = section.find("h2", class_="pi-item")
+                label_elements = section.find_all("h3", class_="pi-data-label")
+                value_elements = section.find_all("div", class_="pi-data-value")
+                
+                section_header_text = section_header.get_text(strip=True) if section_header else None
+                
+                for label, value in zip(label_elements, value_elements):
+                    clean_values = [re.sub(r'\[\d+\]', '', v) for v in value.stripped_strings]
                     details.append({
+                        'section_header': section_header_text,
                         'label': label.get_text(strip=True),
-                        'value': value.get_text(strip=True)
+                        'values': clean_values
                     })
             image_tag = infobox.find("img")
             image_url = image_tag['src'] if image_tag else None

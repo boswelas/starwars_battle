@@ -1,24 +1,45 @@
-import React from 'react';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function GetCharacterDetails({ characterDetails }: any) {
     const { details, image_url } = characterDetails;
+    const [viewDetails, setViewDetails] = useState(false)
+
+    const onClick = () => {
+        if (viewDetails) {
+            setViewDetails(false)
+        } else {
+            setViewDetails(true)
+        }
+    }
 
     return (
-        <div className='mt-3'>
-            <h2>Character Details</h2>
+        <div className='mt-3 mb-8'>
             {image_url && (
                 <div>
                     <Image src={image_url} alt="Character Image" width={200} height={200} />
                 </div>
             )}
-            <ul>
-                {details.map((detail: any, index: number) => (
-                    <li key={index}>
-                        <strong>{detail.label}: </strong>{detail.value}
-                    </li>
-                ))}
-            </ul>
+            {viewDetails ? (
+                <div>
+                    <button onClick={onClick}>Hide Details</button>
+                    <ul>
+                        {details.map((detail: any, index: number) => (
+                            <li key={index}>
+                                {detail.section_header && <h2>{detail.section_header}</h2>}
+                                <strong>{detail.label}:</strong>
+                                <div >
+                                    {detail.values.map((val: any, i: any) => (
+                                        <li key={i}>{val}</li>
+                                    ))}
+                                </div>
+
+                            </li>
+                        ))}
+                    </ul></div>) : (
+                <button onClick={onClick}>View Details</button>
+            )}
+
         </div>
     );
 }

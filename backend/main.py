@@ -20,7 +20,9 @@ async def fetch_characters():
     try:
         await db.connect()
         char_data = await db.character.find_many()
-        char_names = [char.name for char in char_data] 
+        char_names = [char.name for char in char_data]
+        char_names.sort()
+ 
     except Exception as e:
         print(f"Error retrieving all characters: {e}")
         return jsonify(error="Internal server error"), 500
