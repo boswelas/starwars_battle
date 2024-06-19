@@ -62,18 +62,18 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
     }, [selectedCharName]);
 
     return (
-        <div>
+        <div className='w-[16rem]'>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {characters && (
                 <div>
-                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4 text-black">
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4 text-black ">
                         <Autocomplete
                             label="Choose a character"
                             className="max-w-xs"
                             onInputChange={onInputChange}
                         >
                             {characters.map((name) => (
-                                <AutocompleteItem key={name} value={name} className="text-black">
+                                <AutocompleteItem key={name} value={name} className="text-black ">
                                     {name}
                                 </AutocompleteItem>
                             ))}

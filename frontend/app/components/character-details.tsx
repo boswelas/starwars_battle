@@ -25,9 +25,9 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
     };
 
     return (
-        <div className='mt-3 mb-8'>
+        <div className=' mb-8'>
             {image_url && (
-                <div className='flex flex-col items-center justify-center h-[15rem] overflow-hidden'>
+                <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
                     <div className='max-h-full max-w-full flex items-center justify-center'>
                         <Image
                             src={image_url}
@@ -39,23 +39,23 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
                 </div>
             )}
             {viewDetails ? (
-                <div className='flex flex-col items-center'>
-                    <button onClick={onClick} className='text-red-500'>Hide Details</button>
-                    <div className='w-[15rem]'>
+                <div className='flex flex-col items-center '>
+                    <button onClick={onClick} className='text-red-500 text-sm'>Hide Details</button>
+                    <div className='w-[16rem]'>
                         {details.map((section, index) => (
                             <div key={index}>
-                                <div className='bg-neutral-700 p-1 flex flex-col items-center rounded-md mb-1'>
-                                    <h2 className='text-sm font-semibold'>{section.section_header}</h2>
+                                <div className='bg-neutral-700 p-1 flex flex-col items-center'>
+                                    <h2 className='text-xs font-semibold'>{section.section_header}</h2>
                                 </div>
                                 {section.details.map((detail, idx) => (
-                                    <div key={idx} className='flex mb-1 text-sm'>
-                                        <div className='w-[50%]  ml-2'>
+                                    <div key={idx} className={`flex text-xs text-black p-1  ${idx % 2 === 0 ? 'bg-neutral-300' : 'bg-neutral-200'}`}>
+                                        <div className='w-[50%] ml-2 flex flex-col justify-center'>
                                             <h3 className='font-semibold'>{detail.label}:</h3>
                                         </div>
                                         <div className='w-[50%] mr-2'>
-                                            <ul className=''>
+                                            <ul>
                                                 {detail.values.map((val, i) => (
-                                                    <li key={i}>•{val}</li>
+                                                    <li key={i}>• {val}</li>
                                                 ))}
                                             </ul>
                                         </div>
@@ -67,10 +67,9 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
                 </div>
             ) : (
                 <div className='flex flex-col items-center'>
-                    <button onClick={onClick} className='text-blue-500'>View Details</button>
+                    <button onClick={onClick} className='text-blue-500 text-sm'>View Details</button>
                 </div>
-            )
-            }
-        </div >
+            )}
+        </div>
     );
 }

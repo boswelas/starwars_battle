@@ -18,7 +18,7 @@ export default function CharacterPage() {
   };
 
   return (
-    <div className='flex flex-col items-center min-h-screen'>
+    <div className='flex flex-col items-center min-h-screen max-w-screen hide-scrollbar'>
       <h1 className='mt-10 text-2xl font-semibold'>
         Star Wars Character Battle
       </h1>
