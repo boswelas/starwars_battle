@@ -2,6 +2,8 @@ import asyncio
 import re
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
+from collections import defaultdict
+
 
 async def get_char_details(name):
     def replace_spaces(name):
@@ -36,6 +38,7 @@ async def get_char_details(name):
         infobox = soup.find("aside", class_="portable-infobox")
         if infobox:
             details = []
+            grouped_details = defaultdict(list)
             sections = infobox.find_all("section", class_="pi-item")
             for section in sections:
                 section_header = section.find("h2", class_="pi-item")
@@ -46,15 +49,16 @@ async def get_char_details(name):
                 
                 for label, value in zip(label_elements, value_elements):
                     clean_values = [re.sub(r'\[\d+\]', '', v) for v in value.stripped_strings]
-                    details.append({
-                        'section_header': section_header_text,
-                        'label': label.get_text(strip=True),
-                        'values': clean_values
+                    grouped_details[section_header_text].append({
+                    'label': label.get_text(strip=True),
+                    'values': clean_values
                     })
+            grouped_details_list = [
+                {'section_header': key, 'details': value}
+                for key, value in grouped_details.items()
+                ]
             image_tag = infobox.find("img")
             image_url = image_tag['src'] if image_tag else None
-            return {'details': details, 'image_url': image_url}
+            print(grouped_details_list)
+            return {'details': grouped_details_list, 'image_url': image_url}
     return False
-
-# Example usage:
-# asyncio.run(get_char_details("Admiral Ackbar"))

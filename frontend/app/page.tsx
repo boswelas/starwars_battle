@@ -32,7 +32,7 @@ export default function CharacterPage() {
         </button>
       </div>
       {error && <p className="text-red-600 mt-2">{error}</p>}
-      <div className='flex flex-row gap-10 mt-10'>
+      <div className='flex flex-row gap-36 mt-10'>
         <SearchBar onSelect={setCharacter1} />
         <SearchBar onSelect={setCharacter2} />
       </div>

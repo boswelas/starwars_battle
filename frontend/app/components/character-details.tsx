@@ -1,76 +1,76 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function GetCharacterDetails({ characterDetails }: any) {
+interface CharacterDetails {
+    details: {
+        section_header: string;
+        details: {
+            label: string;
+            values: string[];
+        }[];
+    }[];
+    image_url: string | undefined;
+}
+
+interface Props {
+    characterDetails: CharacterDetails;
+}
+
+export default function GetCharacterDetails({ characterDetails }: Props) {
     const { details, image_url } = characterDetails;
-    const [viewDetails, setViewDetails] = useState(false)
+    const [viewDetails, setViewDetails] = useState(false);
 
     const onClick = () => {
-        if (viewDetails) {
-            setViewDetails(false)
-        } else {
-            setViewDetails(true)
-        }
-    }
+        setViewDetails(!viewDetails);
+    };
 
     return (
         <div className='mt-3 mb-8'>
             {image_url && (
-                <div>
-                    <Image src={image_url} alt="Character Image" width={200} height={200} />
+                <div className='flex flex-col items-center justify-center h-[15rem] overflow-hidden'>
+                    <div className='max-h-full max-w-full flex items-center justify-center'>
+                        <Image
+                            src={image_url}
+                            alt="Character Image"
+                            width={200}
+                            height={200}
+                            layout="intrinsic" />
+                    </div>
                 </div>
             )}
             {viewDetails ? (
-                <div>
+                <div className='flex flex-col items-center'>
                     <button onClick={onClick} className='text-red-500'>Hide Details</button>
-                    <ul>
-                        {details.map((detail: any, index: number) => (
-                            <li key={index}>
-                                {detail.section_header &&
-                                    <div className='bg-neutral-600 p-1 rounded-md flex flex-col items-center'>
-                                        <h2 >{detail.section_header}</h2>
-                                    </div>
-                                }
-                                <div className='grid-cols-2'>
-                                    <div className='font-bold'>{detail.label}:</div>
-                                    <div>
-                                        {detail.values.map((val: any, i: any) => (
-                                            <li key={i}>{val}</li>
-                                        ))}
-                                    </div>
+                    <div className='w-[15rem]'>
+                        {details.map((section, index) => (
+                            <div key={index}>
+                                <div className='bg-neutral-700 p-1 flex flex-col items-center rounded-md mb-1'>
+                                    <h2 className='text-sm font-semibold'>{section.section_header}</h2>
                                 </div>
-                            </li>
+                                {section.details.map((detail, idx) => (
+                                    <div key={idx} className='flex mb-1 text-sm'>
+                                        <div className='w-[50%]  ml-2'>
+                                            <h3 className='font-semibold'>{detail.label}:</h3>
+                                        </div>
+                                        <div className='w-[50%] mr-2'>
+                                            <ul className=''>
+                                                {detail.values.map((val, i) => (
+                                                    <li key={i}>{val}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         ))}
-                    </ul></div>) : (
-                <button onClick={onClick} className='text-blue-500'>View Details</button>
-            )}
-
-        </div>
+                    </div>
+                </div>
+            ) : (
+                <div className='flex flex-col items-center'>
+                    <button onClick={onClick} className='text-blue-500'>View Details</button>
+                </div>
+            )
+            }
+        </div >
     );
 }
-
-
-
-
-
-
-
-// export default function GetCharacterDetails({ characterDetails }: any) {
-//     console.log(characterDetails)
-//     return (
-//         <div className='mt-3'>
-//             <h2>Character Details</h2>
-//             {characterDetails}
-//             {/* <p>Name: {characterDetails.name}</p>
-//             <p>Image: <Image src={characterDetails.image} alt={characterDetails.name} width={200}
-//                 height={200} /></p>
-//             <p>Range: {characterDetails.range}</p>
-//             <p>Base ATK: {characterDetails.base_atk}</p>
-//             <p>Base DEF: {characterDetails.base_def}</p>
-//             <p>Max ATK: {characterDetails.max_atk}</p>
-//             <p>Max DEF: {characterDetails.max_def}</p>
-//             <p>ACC: {characterDetails.acc}</p>
-//             <p>EVA: {characterDetails.eva}</p> */}
-//         </div>
-//     )
-// }
