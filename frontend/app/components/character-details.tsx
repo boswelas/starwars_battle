@@ -22,7 +22,7 @@ export default function GetCharacterDetails({ characterDetails }: any) {
             )}
             {viewDetails ? (
                 <div>
-                    <button onClick={onClick}>Hide Details</button>
+                    <button onClick={onClick} className='text-red-500'>Hide Details</button>
                     <ul>
                         {details.map((detail: any, index: number) => (
                             <li key={index}>
@@ -37,7 +37,7 @@ export default function GetCharacterDetails({ characterDetails }: any) {
                             </li>
                         ))}
                     </ul></div>) : (
-                <button onClick={onClick}>View Details</button>
+                <button onClick={onClick} className='text-blue-500'>View Details</button>
             )}
 
         </div>

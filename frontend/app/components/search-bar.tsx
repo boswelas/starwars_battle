@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import GetCharacterDetails from './character-details';
 import { fetchAllCharacters, fetchCharacterDetails } from '../lib/api';
-import Image from 'next/image';
-
 
 interface SearchBarProps {
     onSelect: (value: string) => void;
@@ -15,6 +13,8 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
     const [error, setError] = useState<string | null>(null);
     const [selectedCharName, setSelectedCharName] = useState("");
     const [characterDetails, setCharacterDetails] = useState<any | null>(null);
+    const [loading, setLoading] = useState(false)
+
 
     const onInputChange = (value: string) => {
         if (characters && characters.includes(value)) {
@@ -46,7 +46,9 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
         if (selectedCharName) {
             const fetchCharacterData = async () => {
                 try {
+                    setLoading(true)
                     const result = await fetchCharacterDetails(selectedCharName);
+                    setLoading(false)
                     setCharacterDetails(result!.data!);
                     setError(null);
                 } catch (error: any) {
@@ -77,19 +79,19 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
                             ))}
                         </Autocomplete>
                     </div>
-
-                    {characterDetails ? (
-                        <div className='mt-10'>
-                            <GetCharacterDetails characterDetails={characterDetails} />
+                    {loading ? (
+                        <div className='flex flex-col items-center justify-center mt-32 text-red-500 animate-pulse'>
+                            <h2>Loading character...</h2>
                         </div>
                     ) : (
-                        <div className='flex flex-col items-center'>
-                            <div className='flex flex-col items-center justify-center mt-10 bg-gray-300 h-[16.5rem] w-[12.5rem] opacity-60 animate-pulse'>
-                                <Image className='opacity-60 animate-pulse' src={"/rebel.jpeg"} alt='/Rebel_Alliance_logo.png' width={190} height={266} ></Image>
-                            </div></div>
+                        characterDetails && (
+                            <div className='mt-6 flex flex-col items-center' >
+                                <GetCharacterDetails characterDetails={characterDetails} />
+                            </div>
+                        )
                     )}
                 </div>
             )}
-        </div>
+        </div >
     );
 }
