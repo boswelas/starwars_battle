@@ -55,7 +55,7 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
                                         <div className='w-[50%] mr-2'>
                                             <ul className=''>
                                                 {detail.values.map((val, i) => (
-                                                    <li key={i}>{val}</li>
+                                                    <li key={i}>•{val}</li>
                                                 ))}
                                             </ul>
                                         </div>
