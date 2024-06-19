@@ -26,14 +26,19 @@ export default function GetCharacterDetails({ characterDetails }: any) {
                     <ul>
                         {details.map((detail: any, index: number) => (
                             <li key={index}>
-                                {detail.section_header && <h2>{detail.section_header}</h2>}
-                                <strong>{detail.label}:</strong>
-                                <div >
-                                    {detail.values.map((val: any, i: any) => (
-                                        <li key={i}>{val}</li>
-                                    ))}
+                                {detail.section_header &&
+                                    <div className='bg-neutral-600 p-1 rounded-md flex flex-col items-center'>
+                                        <h2 >{detail.section_header}</h2>
+                                    </div>
+                                }
+                                <div className='grid-cols-2'>
+                                    <div className='font-bold'>{detail.label}:</div>
+                                    <div>
+                                        {detail.values.map((val: any, i: any) => (
+                                            <li key={i}>{val}</li>
+                                        ))}
+                                    </div>
                                 </div>
-
                             </li>
                         ))}
                     </ul></div>) : (
