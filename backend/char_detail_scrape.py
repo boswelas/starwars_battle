@@ -20,20 +20,33 @@ async def get_char_details(name):
         try:
             await page.goto(url, wait_until='domcontentloaded')
             print("went to:", url)
+            content = await page.content()
+            print("got content")
+             
+            soup = BeautifulSoup(content, "html.parser")
+            
+            no_article_text = soup.find("div", class_="noarticletext")
+            if no_article_text:
+                print("No article text found. Article does not exist.")
+                await browser.close()
+                return False
+            print("No noarticletext found, proceeding to find infobox.")
+            
             await page.wait_for_selector('aside.portable-infobox')
             print("selector found")
+       
+            content = await page.content()
+            print("got content again")
+            await browser.close()
+           
+            soup = BeautifulSoup(content, "html.parser")
         except Exception as e:
             print(f"Error during navigation or waiting for selector: {e}")
             await browser.close()
             return False
-        print("getting content")
-        content = await page.content()
-        print("got content. closing browser")
-        await browser.close()
 
     if content:
         print("in the soup")
-        soup = BeautifulSoup(content, "html.parser")
         infobox = soup.find("aside", class_="portable-infobox")
         if infobox:
             details = defaultdict(list)
@@ -48,8 +61,7 @@ async def get_char_details(name):
                 for label, value in zip(label_elements, value_elements):
                     # Remove citations
                     clean_values = [re.sub(r'\[\d+\]', '', v).strip() for v in value.stripped_strings]
-
-                    # Process the values
+                 
                     processed_values = []
                     buffer = ''
                     inside_parentheses = False
@@ -57,8 +69,8 @@ async def get_char_details(name):
                     for v in clean_values:
                         # Remove spaces before commas within values
                         v = re.sub(r'\s+,', ',', v)
-
-                        if v == ',':  # Handle standalone comma
+                        # Handle standalone comma
+                        if v == ',':  
                             if processed_values:
                                 processed_values[-1] += v
                         elif re.match(r'.*\(.*\).*', v):  # Complete parenthesis in the string
