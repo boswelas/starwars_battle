@@ -34,13 +34,16 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
                             alt="Character Image"
                             width={200}
                             height={200}
-                            layout="intrinsic" />
+                            layout="intrinsic"
+                            objectFit="contain"
+                            className="custom-image"
+                        />
                     </div>
                 </div>
             )}
             {viewDetails ? (
                 <div className='flex flex-col items-center '>
-                    <button onClick={onClick} className='text-red-500 text-sm'>Hide Details</button>
+                    <button onClick={onClick} className='text-red-500 text-sm p-2'>Hide Details</button>
                     <div className='w-[16rem]'>
                         {details.map((section, index) => (
                             <div key={index}>
@@ -67,7 +70,7 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
                 </div>
             ) : (
                 <div className='flex flex-col items-center'>
-                    <button onClick={onClick} className='text-blue-500 text-sm'>View Details</button>
+                    <button onClick={onClick} className='text-blue-500 text-sm p-2'>View Details</button>
                 </div>
             )}
         </div>

@@ -40,4 +40,10 @@ body {
     scrollbar-width: none;
     /* Firefox */
   }
+
+  .custom-image {
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
 }
