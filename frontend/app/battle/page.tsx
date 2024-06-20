@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { battle } from '../lib/api';
 import Loading from './loading';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 export default function BattlePage() {
@@ -40,11 +41,8 @@ export default function BattlePage() {
             <div className='mb-10'>
                 <Link href={"/"}>
                     <button className="mt-5 fixed right-[5%] primary-btn h-10 bg-neutral-600 p-3 rounded-md          
-            flex items-center justify-center 
-            disabled:bg-neutral-400 
-            disabled:text-neutral-300 
-            disabled:cursor-not-allowed">
-                        Try Another Battle
+            flex items-center justify-center hover:bg-neutral-500">
+                        Try Another Battle <Image src={'/icons8-rebel-48.png'} alt='' height={20} width={20} className='ml-1'></Image>
                     </button>
                 </Link>
             </div>

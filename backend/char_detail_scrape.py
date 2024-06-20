@@ -106,6 +106,5 @@ async def get_char_details(name):
             ]
             image_tag = infobox.find("img")
             image_url = image_tag['src'] if image_tag else None
-            print(details_list)
             return {'details': details_list, 'image_url': image_url}
     return {'details': 'Details unavailable'}

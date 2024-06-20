@@ -28,7 +28,7 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
         <div className=' mb-8'>
             {image_url && (
                 <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
-                    <div className='max-h-full max-w-full flex items-center justify-center'>
+                    <div className='max-h-full max-w-full flex items-center'>
                         <Image
                             src={image_url}
                             alt="Character Image"

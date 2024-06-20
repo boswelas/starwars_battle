@@ -3,6 +3,7 @@ const nextConfig = {
     images: {
         remotePatterns: [
             { hostname: "static.wikia.nocookie.net" },
+            { hostname: "img.icons8.com" }
         ]
     }
 };
