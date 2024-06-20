@@ -89,5 +89,31 @@ async def get_details():
         return jsonify(error="Character details not found"), 404
     return jsonify(error="No character name provided"), 400
 
+@app.route('/get_char_image', methods=['GET'])
+async def get_image():
+    char_name = request.args.get('char_name')
+    if not char_name:
+        return jsonify(error="Character name is required"), 400
+
+    await db.connect()
+    try:
+        char_data = await db.character.find_first(
+            where={
+                'name': char_name
+            },
+            select={
+                'image': True,
+            },
+        )
+        if not char_data:
+            return jsonify(error="Character image not found"), 404
+    except Exception as e:
+        print(f"Error fetching character {char_name}: {e}")
+        return jsonify(error="Internal server error"), 500
+    finally:
+        await db.disconnect()
+    return jsonify(data=char_data)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

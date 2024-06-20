@@ -1,4 +1,3 @@
-import asyncio
 import re
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
@@ -59,57 +58,40 @@ async def get_char_details(name):
                 section_header_text = section_header.get_text(strip=True) if section_header else None
                 
                 for label, value in zip(label_elements, value_elements):
-                    # Remove citations
-                    clean_values = [re.sub(r'\[\d+\]', '', v).strip() for v in value.stripped_strings]
-                 
+                    # Remove citations and commas
+                    clean_values = [re.sub(r'\[\d+\]', '', v).replace(',', '').strip() for v in value.stripped_strings]
+                    
                     processed_values = []
                     buffer = ''
                     inside_parentheses = False
 
                     for v in clean_values:
-                        # Remove spaces before commas within values
-                        v = re.sub(r'\s+,', ',', v)
-                        # Handle standalone comma
-                        if v == ',':  
-                            if processed_values:
-                                processed_values[-1] += v
-                        elif re.match(r'.*\(.*\).*', v):  # Complete parenthesis in the string
-                            if buffer:
-                                buffer += ' ' + v
-                                processed_values.append(buffer.strip())
-                                buffer = ''
-                            else:
-                                processed_values.append(v.strip())
-                        elif re.match(r'\(.*', v):  # Opening parenthesis without closing
+                        if '(' in v and ')' not in v:
+                            buffer = v
                             inside_parentheses = True
-                            buffer += ' ' + v if buffer else v
-                        elif re.match(r'.*\)', v):  # Closing parenthesis
-                            inside_parentheses = False
-                            buffer += ' ' + v
-                            if processed_values:
-                                processed_values[-1] += ' ' + buffer.strip()
-                            else:
-                                processed_values.append(buffer.strip())
-                            buffer = ''
                         elif inside_parentheses:
                             buffer += ' ' + v
-                        elif re.match(r'\d', v):  # Numbers
-                            if buffer:
-                                processed_values.append(buffer.strip())
-                            buffer = v
-                        else:
-                            if buffer:
-                                buffer += ' ' + v
-                                processed_values.append(buffer.strip())
+                            if ')' in v:
+                                if processed_values:
+                                    processed_values[-1] += ' ' + buffer.strip()
                                 buffer = ''
+                                inside_parentheses = False
+                        else:
+                            if v.startswith('(') and v.endswith(')'):
+                                if processed_values:
+                                    processed_values[-1] += ' ' + v
                             else:
                                 processed_values.append(v.strip())
 
-                    if buffer:
-                        processed_values.append(buffer.strip())
-
+                    # If there's anything left in the buffer, append it
+                    if buffer and processed_values:
+                        processed_values[-1] += ' ' + buffer.strip()
+                    
                     # Remove empty values
                     processed_values = [value for value in processed_values if value]
+
+                    # Ensure a space before parentheses
+                    processed_values = [re.sub(r'\s*\(\s*', ' (', v).replace(' )', ')') for v in processed_values]
 
                     if processed_values:
                         details[section_header_text].append({
@@ -127,5 +109,3 @@ async def get_char_details(name):
             return {'details': details_list, 'image_url': image_url}
     return False
 
-# Example usage
-asyncio.run(get_char_details("Han Solo"))
