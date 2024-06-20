@@ -13,7 +13,6 @@ def battle(character1_data, character2_data):
         acc=character1_data.acc,
         eva=character1_data.eva
     )
-
     character2 = Character(
         name=character2_data.name,
         image=character2_data.image,
@@ -25,12 +24,10 @@ def battle(character1_data, character2_data):
         acc=character2_data.acc,
         eva=character2_data.eva
     )
-    
     battle_play = []
 
     speed1 = character1.calculate_speed()
     speed2 = character2.calculate_speed()
-
     if speed1 > speed2:
         first, second = character1, character2
     elif speed2 > speed1:
@@ -39,7 +36,20 @@ def battle(character1_data, character2_data):
         first, second = (character1, character2) if random.choice([True, False]) else (character2, character1)
 
     turn = 0
+    turn_limit = 20
+
     while character1.health > 0 and character2.health > 0:
+        if turn >= turn_limit:
+            # Determine which character makes the critical attack
+            if character1.health > character2.health:
+                attacker, defender = character1, character2
+            else:
+                attacker, defender = character2, character1
+            damage = defender.health  # Critical attack to take out total HP
+            defender.take_damage(damage)
+            battle_play.append(f"{attacker.name} makes a critical attack on {defender.name} for {damage:.2f} damage. {defender.name}'s health is now 0.00.")
+            break
+
         attacker = first if turn % 2 == 0 else second
         defender = second if turn % 2 == 0 else first
 
@@ -56,10 +66,15 @@ def battle(character1_data, character2_data):
 
         turn += 1
 
-    if character1.health > 0:
+    if character1.health > 0 and character2.health <= 0:
         battle_play.append(f"{character1.name} wins!")
-    else:
+    elif character2.health > 0 and character1.health <= 0:
         battle_play.append(f"{character2.name} wins!")
-    return(battle_play)
+    else:
+        if character1.health > character2.health:
+            battle_play.append(f"{character1.name} wins!")
+        else:
+            battle_play.append(f"{character2.name} wins!")
 
-
+    print(battle_play)
+    return battle_play
