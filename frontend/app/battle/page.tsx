@@ -39,7 +39,7 @@ export default function BattlePage() {
         <div className='flex flex-col items-center min-h-screen '>
             <div className='mb-10'>
                 <Link href={"/"}>
-                    <button className="mt-5 fixed right-[5%] primary-btn h-10 text-lg bg-blue-600 p-3 rounded-2xl font-semibold         
+                    <button className="mt-5 fixed right-[5%] primary-btn h-10 bg-neutral-600 p-3 rounded-md          
             flex items-center justify-center 
             disabled:bg-neutral-400 
             disabled:text-neutral-300 

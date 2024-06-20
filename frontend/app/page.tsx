@@ -19,13 +19,13 @@ export default function CharacterPage() {
 
   return (
     <div className='flex flex-col items-center min-h-screen max-w-screen overflow-y-scroll no-scrollbar '>
-      <h1 className='mt-10 text-2xl font-semibold'>
+      <h1 className='mt-10 text-3xl font-semibold mb-5'>
         Star Wars Character Battle
       </h1>
 
       <div className='flex items-center justify-center'>
         <button
-          className="mt-3 primary-btn h-10 text-lg bg-red-600 p-3 rounded-2xl font-semibold flex items-center justify-center"
+          className="mt-3 primary-btn h-10 text-lg bg-red-600 p-3 rounded-md font-semibold flex items-center justify-center"
           onClick={handleBattle}
         >
           Battle

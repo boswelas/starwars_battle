@@ -1,3 +1,4 @@
+import asyncio
 import re
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
@@ -28,7 +29,7 @@ async def get_char_details(name):
             if no_article_text:
                 print("No article text found. Article does not exist.")
                 await browser.close()
-                return False
+                return {'details': 'Details unavailable'}
             print("No noarticletext found, proceeding to find infobox.")
             
             await page.wait_for_selector('aside.portable-infobox')
@@ -42,7 +43,7 @@ async def get_char_details(name):
         except Exception as e:
             print(f"Error during navigation or waiting for selector: {e}")
             await browser.close()
-            return False
+            return {'details': 'Details unavailable'}
 
     if content:
         print("in the soup")
@@ -107,5 +108,4 @@ async def get_char_details(name):
             image_url = image_tag['src'] if image_tag else None
             print(details_list)
             return {'details': details_list, 'image_url': image_url}
-    return False
-
+    return {'details': 'Details unavailable'}

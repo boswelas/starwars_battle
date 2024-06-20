@@ -62,9 +62,4 @@ def battle(character1_data, character2_data):
         battle_play.append(f"{character2.name} wins!")
     return(battle_play)
 
-# # Example characters with range
-# char1 = Character(name="Luke Skywalker", image="luke.jpg", range="s", base_atk=6250, base_def=6300, max_atk=8550, max_def=8650, acc=170, eva=80)
-# char2 = Character(name="Darth Vader", image="vader.jpg", range="s", base_atk=6590, base_def=6900, max_atk=9090, max_def=9000, acc=170, eva=80)
 
-# # Simulate battle
-# winner = battle(char1, char2)

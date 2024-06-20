@@ -51,7 +51,6 @@ async def fetch_character():
         return jsonify(error="Internal server error"), 500
     finally:
         await db.disconnect()
-    print(char_data_dict)
     return jsonify(data=char_data_dict)
 
 @app.route('/character_battle', methods=['GET'])
@@ -76,7 +75,6 @@ async def get_battle():
         return jsonify(error="Internal server error"), 500
     finally:
         await db.disconnect()
-    print(calculate_battle)
     return jsonify(data=calculate_battle)
 
 @app.route('/get_char_deets', methods=['GET'])
@@ -101,9 +99,6 @@ async def get_image():
             where={
                 'name': char_name
             },
-            select={
-                'image': True,
-            },
         )
         if not char_data:
             return jsonify(error="Character image not found"), 404
@@ -112,7 +107,7 @@ async def get_image():
         return jsonify(error="Internal server error"), 500
     finally:
         await db.disconnect()
-    return jsonify(data=char_data)
+    return jsonify(data=char_data.image)
 
 
 if __name__ == '__main__':
