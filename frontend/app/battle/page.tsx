@@ -37,20 +37,19 @@ export default function BattlePage() {
         return <Loading />
     }
     return (
-        <div className='flex flex-col items-center min-h-screen '>
+        <div className='flex flex-col items-center h-screen overflow-hidden'>
             <div className='mb-10'>
                 <Link href={"/"}>
-                    <button className="mt-5 fixed right-[5%] primary-btn h-10 bg-neutral-600 p-3 rounded-md          
-            flex items-center justify-center hover:bg-neutral-500">
-                        Try Another Battle <Image src={'/icons8-rebel-48.png'} alt='' height={20} width={20} className='ml-1'></Image>
+                    <button className="mt-5 fixed right-[5%] primary-btn h-10 bg-neutral-700 p-3 rounded-md          
+            flex items-center justify-center hover:bg-neutral-600">
+                        Try Another Battle <Image src={'/images/icons8-rebel-48.png'} alt='' height={20} width={20} className='ml-1'></Image>
                     </button>
                 </Link>
             </div>
-            <h1 className='mt-10 text-2xl font-semibold'>
+            <h1 className='mt-10 text-4xl font-semibold '>
                 Battle between {character1} and {character2}
             </h1>
-            <div className="mt-5 mb-10">
-                <h2 className="text-lg font-semibold">Battle Results:</h2>
+            <div className="mt-5 mb-10 w-[96%] no-scrollbar overflow-y-scroll flex flex-col items-center">
                 <ul className="list-disc list-inside">
                     {battleDetails!.map((result, index) => (
                         <li key={index}>{result}</li>

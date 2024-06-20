@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Starjedi';
+  src: url('/fonts/starjedi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,6 +35,13 @@ body {
   background: linear-gradient(to bottom,
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  font-family: 'Roboto', sans-serif;
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Roboto', sans-serif;
+  }
 }
 
 @layer utilities {
@@ -35,17 +49,19 @@ body {
     text-wrap: balance;
   }
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
+
   .no-scrollbar::-webkit-scrollbar {
-    display: none;
+    width: 10px;
+    background-color: #000;
   }
 
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
+  .no-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #262626;
+    border-radius: 6px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #171717;
   }
 
   .custom-image {
@@ -68,8 +84,10 @@ body {
   }
 
   .custom-heading2 {
-    font-family: 'StJedise', sans-serif;
-    font-weight: bold;
+    font-family: 'StarJedi', sans-serif;
+    font-weight: 100;
     font-size: 2rem;
   }
+
+
 }

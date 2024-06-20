@@ -27,7 +27,7 @@ export default function CharacterPage() {
       <h2 className='text-xl mb-5 text-[#3a3a3a] custom-heading2'>Character Battle</h2>
 
       <div className='flex items-center justify-center'>
-        <Image src={'/x-wing.png'} height={30} width={30} alt="" className='mr-5 mt-2'></Image>
+        <Image src={'/images/x-wing.png'} height={30} width={30} alt="" className='mr-5 mt-2'></Image>
         <button
           className="mt-3 primary-btn h-10 text-lg bg-red-700 p-3 rounded-md w-28  flex items-center justify-center hover:bg-red-600"
           onClick={handleBattle}
@@ -35,7 +35,7 @@ export default function CharacterPage() {
           Battle
 
         </button>
-        <Image src={'/tie-fighter.png'} height={30} width={30} alt="" className='ml-5 mt-2'></Image>
+        <Image src={'/images/tie-fighter.png'} height={30} width={30} alt="" className='ml-5 mt-2'></Image>
 
       </div>
       {error && <p className="text-red-600 mt-2 ">{error}</p>}
