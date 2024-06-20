@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Star Wars Battle",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images/favicon.ico",
   }
 };
 

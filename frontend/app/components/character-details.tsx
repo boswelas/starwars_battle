@@ -44,7 +44,7 @@ export default function GetCharacterDetails({ characterDetails }: Props) {
             {viewDetails ? (
                 <div className='flex flex-col items-center '>
                     <button onClick={onClick} className='text-red-500 text-sm p-2'>Hide Details</button>
-                    <div className='w-[16rem]'>
+                    <div className='w-[16rem] '>
                         {details.map((section, index) => (
                             <div key={index}>
                                 <div className='bg-neutral-700 p-1 flex flex-col items-center'>
