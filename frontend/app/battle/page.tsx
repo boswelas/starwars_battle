@@ -23,7 +23,7 @@ export default function BattlePage() {
                 setBattle(result.data || null);
                 setError(null);
                 setLoading(false)
-                console.log(battleDetails)
+                console.log(result.data)
             } catch (error: any) {
                 setError(error.message);
                 setBattle(null);
@@ -52,11 +52,9 @@ export default function BattlePage() {
                 </h1>
                 <h1 className='custom-heading2 lowercase'>{character1} and {character2}</h1>
             </div>
-            <div className="mt-5 mb-10 w-[96%] no-scrollbar overflow-y-scroll flex flex-col items-center">
+            <div className="mt-5 mb-10 w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center">
                 <ul className="list-disc list-inside">
-                    {battleDetails!.map((result, index) => (
-                        <li key={index}>{result}</li>
-                    ))}
+                    {battleDetails}
                 </ul>
             </div>
         </div>

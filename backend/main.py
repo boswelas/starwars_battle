@@ -1,3 +1,4 @@
+from chat_response import chat_response
 from char_detail_scrape import get_char_details
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -53,30 +54,6 @@ async def fetch_character():
         await db.disconnect()
     return jsonify(data=char_data_dict)
 
-@app.route('/character_battle', methods=['GET'])
-async def get_battle():
-    character1 = request.args.get('character1')
-    character2 = request.args.get('character2')
-
-    if not (character1 and character2):
-        return jsonify(error="Characters are required"), 400
-    try:
-        await db.connect()
-        char1_data = await db.character.find_first(where={'name': character1})
-        if not char1_data:
-            return jsonify(error="Character1 not found"), 404
-        char2_data = await db.character.find_first(where={'name': character2})
-        if not char2_data:
-            return jsonify(error="Character2 not found"), 404
-        calculate_battle = battle(char1_data, char2_data)
-
-    except Exception as e:
-        print(f"Error fetching characters: {e}")
-        return jsonify(error="Internal server error"), 500
-    finally:
-        await db.disconnect()
-    return jsonify(data=calculate_battle)
-
 @app.route('/get_char_deets', methods=['GET'])
 async def get_details():
     char_name = request.args.get('char_name')
@@ -109,6 +86,29 @@ async def get_image():
         await db.disconnect()
     return jsonify(data=char_data.image)
 
+@app.route('/character_battle', methods=['GET'])
+async def get_battle():
+    character1 = request.args.get('character1')
+    character2 = request.args.get('character2')
+
+    if not (character1 and character2):
+        return jsonify(error="Characters are required"), 400
+    try:
+        await db.connect()
+        char1_data = await db.character.find_first(where={'name': character1})
+        if not char1_data:
+            return jsonify(error="Character1 not found"), 404
+        char2_data = await db.character.find_first(where={'name': character2})
+        if not char2_data:
+            return jsonify(error="Character2 not found"), 404
+        calculate_battle = battle(char1_data, char2_data)
+        battle_details = chat_response(calculate_battle)
+    except Exception as e:
+        print(f"Error fetching characters: {e}")
+        return jsonify(error="Internal server error"), 500
+    finally:
+        await db.disconnect()
+    return jsonify(data=battle_details)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
