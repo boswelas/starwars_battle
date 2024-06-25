@@ -31,6 +31,7 @@ async def get_char_data():
                 acc = details[8].text.strip() if len(details) > 8 else None
                 eva = details[9].text.strip() if len(details) > 9 else None
 
+                # Check that all values are the correct type 
                 if (range_val.isdigit() and
                     base_atk.isdigit() and
                     base_def.isdigit() and
@@ -38,6 +39,7 @@ async def get_char_data():
                     max_def.isdigit() and
                     acc.isdigit() and
                     eva.isdigit()):   
+                    # Avoid duplicate characters
                     if name not in char_data or int(max_atk) > int(char_data[name]['max_atk']):
                         char_data[name] = {
                             'name': name,

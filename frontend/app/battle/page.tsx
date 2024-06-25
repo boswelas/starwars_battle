@@ -37,7 +37,7 @@ export default function BattlePage() {
         return <Loading />
     }
     return (
-        <div className='flex flex-col items-center h-screen overflow-hidden'>
+        <div className='flex flex-col items-center h-screen overflow-hidden bg-cover bg-center' style={{ backgroundImage: `url('/images/space.jpg')` }}>
             <div className='mb-10'>
                 <Link href={"/"}>
                     <button className="mt-5 fixed right-[5%] primary-btn h-10 bg-neutral-700 p-3 rounded-md          
@@ -46,9 +46,12 @@ export default function BattlePage() {
                     </button>
                 </Link>
             </div>
-            <h1 className='mt-10 text-4xl font-semibold '>
-                Battle between {character1} and {character2}
-            </h1>
+            <div className='flex flex-col items-center text-wrap text-4xl font-semibold text-[#FFFF00] '>
+                <h1 className='mt-10 custom-heading2'>
+                    Battle between
+                </h1>
+                <h1 className='custom-heading2'>{character1} and {character2}</h1>
+            </div>
             <div className="mt-5 mb-10 w-[96%] no-scrollbar overflow-y-scroll flex flex-col items-center">
                 <ul className="list-disc list-inside">
                     {battleDetails!.map((result, index) => (
