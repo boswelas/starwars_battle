@@ -15,7 +15,7 @@ export default function InfoBox({ onClose }: InfoBoxProps) {
     };
 
     return (
-        <div className={`fixed top-6 left-6 bg-neutral-200 w-[20rem] p-4 rounded-md shadow-md z-50 ${isOpen ? 'block' : 'hidden'}`}>
+        <div className={`fixed top-6 left-6 bg-neutral-200 w-[20rem] p-4 shadow-md z-50 ${isOpen ? 'block' : 'hidden'}`}>
             <div className="flex justify-between items-center">
                 <button onClick={handleClose} className="text-black absolute right-1 top-2">
                     <XMarkIcon className="size-5" /></button>
