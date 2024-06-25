@@ -22,7 +22,7 @@ export default function InfoBox({ onClose }: InfoBoxProps) {
             </div>
             <div className='text-black mt-[.5rem] text-sm'>
                 <ul>
-                    <li>• Characters take a moment to load because they are scraped in real time from <a href='https://starwars.fandom.com/' target="_blank" className='text-blue-700 underline'>starwars.fandom.com</a></li>
+                    <li>• Character details take a moment to load because they are scraped in real time from <a href='https://starwars.fandom.com/' target="_blank" className='text-blue-700 underline'>starwars.fandom.com</a></li>
                     <li>• The battle narrative is generated with ChatGPT's API.</li>
                     <li className='mt-3'>• Like my project? Think about employing me!  <a href='https://boswelas.github.io/' target="_blank" className='text-blue-700 underline'>My Portfolio</a></li>
                 </ul>
