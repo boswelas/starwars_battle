@@ -47,12 +47,12 @@ export default function BattlePage() {
                 </Link>
             </div>
             <div className='flex flex-col items-center text-center text-wrap text-4xl font-semibold text-[#FFFF00] '>
-                <h1 className='mt-10 custom-heading2'>
+                <h1 className='mt-16 custom-heading2'>
                     Battle between
                 </h1>
                 <h1 className='custom-heading2 lowercase'>{character1} and {character2}</h1>
             </div>
-            <div className="mt-5 mb-10 w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center">
+            <div className="mt-10 mb-10 w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center">
                 <ul className="list-disc list-inside">
                     {battleDetails}
                 </ul>
