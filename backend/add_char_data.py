@@ -1,5 +1,5 @@
 from prisma import Client as PrismaClient
-from backend.char_stats_scrape import get_char_data
+from char_stats_scrape import get_char_data
 import asyncio
 
 db = PrismaClient()
@@ -9,8 +9,11 @@ async def add_character_data():
         await db.connect()
 
         char_data = await get_char_data()
+        print("got char data")
+        print("char data is: ", char_data)
 
         for char in char_data:
+            print(char)
             try:
                 await db.character.create(
                     data={
@@ -24,6 +27,7 @@ async def add_character_data():
                     'acc': int(char['acc']),
                     'eva': int(char['eva']),
                     })
+                print("added ", char['name'])
             except Exception as e:
                 print(f"Error creating entry for {char['name']}: {e}")
     finally:
