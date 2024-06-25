@@ -41,10 +41,8 @@ async def get_char_data():
                     max_def.isdigit() and
                     acc.isdigit() and
                     eva.isdigit()):
-                    print("ranges are valid for ", cleaned_name)   
                     # Avoid duplicate characters
                     if cleaned_name not in char_data or int(max_atk) > int(char_data[cleaned_name]['max_atk']):
-                        print("adding ", cleaned_name)
                         char_data[cleaned_name] = {
                             'name': cleaned_name,
                             'image': image,
@@ -63,6 +61,5 @@ async def get_char_data():
     }
 
     char_data_filtered_list = list(char_data_filtered.values())
-    print("ran file")
 
     return char_data_filtered_list
