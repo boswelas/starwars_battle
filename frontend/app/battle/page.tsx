@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { battle, battle_calc } from '../lib/api';
+import { battle } from '../lib/api';
 import Loading from './loading';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -59,7 +59,7 @@ export default function BattlePage() {
                     </h1>
                     <h1 className='custom-heading2 lowercase'>{character1} and {character2}</h1>
                 </div>
-                <div className="mt-10 mb-10 w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center">
+                <div className="mt-10 mb-10 w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center bg-black">
                     <ul className="list-disc list-inside">
                         {battleDetails}
                     </ul>
@@ -67,20 +67,21 @@ export default function BattlePage() {
 
             </div>
             <div className='ml-[18rem] w-[60%] mb-10'>
-                <button className='text-red-600 font-semibold' onClick={onClick}>
-                    View Battle Reference
-                </button>
-                {showReference && (
-
-                    <div className=''>
-                        <p className=' font-semibold'>Here are the results from the battle calculator, which were given to ChatGPT to generate the story above.</p>
+                {showReference ? (
+                    <div className='bg-black'>
+                        <button className='text-red-600 text-sm' onClick={onClick}>
+                            Hide Battle Reference
+                        </button>
+                        <p className='text-lg text-[#FFFF00]'>These are the results from the battle calculator, which were given to ChatGPT to generate the story above.</p>
                         <ul className="list-disc list-inside">
                             {battleReference!.map((result, index) => (
                                 <li key={index}>{result}</li>
                             ))}
                         </ul>
                     </div>
-                )}
+                ) : (<button className='text-red-600 text-sm' onClick={onClick}>
+                    View Battle Reference
+                </button>)}
             </div>
         </div>
     );
