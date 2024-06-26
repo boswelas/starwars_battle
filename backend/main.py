@@ -103,12 +103,14 @@ async def get_battle():
             return jsonify(error="Character2 not found"), 404
         calculate_battle = battle(char1_data, char2_data)
         battle_details = chat_response(calculate_battle)
+        battle_all = [[calculate_battle], [battle_details]]
     except Exception as e:
         print(f"Error fetching characters: {e}")
         return jsonify(error="Internal server error"), 500
     finally:
         await db.disconnect()
-    return jsonify(data=battle_details)
+    return jsonify(data=battle_all)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

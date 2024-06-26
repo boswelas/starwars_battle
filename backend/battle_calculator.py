@@ -48,7 +48,7 @@ def battle(character1_data, character2_data):
                 attacker, defender = character2, character1
             damage = defender.health  # Critical attack to take out total HP
             defender.take_damage(damage)
-            # battle_play.append(f"{attacker.name} makes a critical attack on {defender.name} for {damage:.2f} damage. {defender.name}'s health is now 0.00.")
+            battle_play.append(f"{attacker.name} makes a critical attack on {defender.name} for {damage:.2f} damage. {defender.name}'s health is now 0.00.")
             break
 
         attacker = first if turn % 2 == 0 else second
@@ -59,11 +59,11 @@ def battle(character1_data, character2_data):
             critical_hit = random.random() < 0.1  # 10% chance of critical hit
             if critical_hit:
                 damage *= 1.5
-                # battle_play.append(f"Critical hit!")
+                battle_play.append(f"Critical hit!")
             defender.take_damage(damage)
-            # battle_play.append(f"{attacker.name} hits {defender.name} for {damage:.2f} damage. {defender.name}'s health is now {defender.health:.2f}.")
-        # else:
-        #     battle_play.append(f"{attacker.name} misses {defender.name}.")
+            battle_play.append(f"{attacker.name} hits {defender.name} for {damage:.2f} damage. {defender.name}'s health is now {defender.health:.2f}.")
+        else:
+            battle_play.append(f"{attacker.name} misses {defender.name}.")
 
         turn += 1
 
