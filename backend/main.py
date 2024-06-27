@@ -1,3 +1,4 @@
+from char_image_scrape import scrape_char_image
 from chat_response import chat_response
 from char_detail_scrape import get_char_details
 from flask import Flask, jsonify, request
@@ -107,6 +108,17 @@ async def get_battle():
         await db.disconnect()
     return jsonify(data=battle_all)
 
+@app.route('/scrape_image', methods=['GET'])
+async def get_scrape_image():
+    char_name = request.args.get('char_name')
+    if char_name:
+        image = await scrape_char_image(char_name)
+        if image:
+            return jsonify(data=image)
+        return jsonify(error="Character details not found"), 404
+    return jsonify(error="No character name provided"), 400
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { battle, getCharImage } from '../lib/api';
+import { battle, getCharImage, scrapeCharImage } from '../lib/api';
 import Loading from './loading';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -17,8 +17,12 @@ export default function BattlePage() {
     const [showReference, setShowReference] = useState(false);
     const [battleReference, setBattleReference] = useState<string[] | null>(null);
     const [isLoser, setLoser] = useState("")
-    const [char1Photo, setChar1Photo] = useState("")
-    const [char2Photo, setChar2Photo] = useState("")
+    const [char1Photo, setChar1Photo] = useState<string | null>(null);
+    const [char2Photo, setChar2Photo] = useState<string | null>(null);
+    const [altImage1, setAltImage1] = useState("")
+    const [altImage2, setAltImage2] = useState("")
+
+
 
 
     function onClick() {
@@ -32,17 +36,19 @@ export default function BattlePage() {
                 setBattle(result.data[1] || null);
                 setBattleReference(result.data[0][0] || null);
                 setError(null);
-                const char1 = await getCharImage(character1!);
-                setChar1Photo(char1.data);
-                console.log("char1photo: ", char1Photo);
-                const char2 = await getCharImage(character2!);
-                setChar2Photo(char2.data);
+                const char1 = await scrapeCharImage(character1!);
+                setChar1Photo(char1.data.image_url);
+                const char2 = await scrapeCharImage(character2!);
+                setChar2Photo(char2.data.image_url);
                 if (result.data[0][0] && result.data[0][0].length > 0) {
                     const lastItem = result.data[0][0][result.data[0][0].length - 1];
                     setLoser(lastItem);
                 }
+                const alt1 = await getCharImage(character1!);
+                setAltImage1(alt1.data)
+                const alt2 = await getCharImage(character2!);
+                setAltImage2(alt2.data)
                 setLoading(false);
-                console.log("battle ref: ", battleReference);
             }
             catch (error: any) {
                 setError(error.message);
@@ -76,28 +82,45 @@ export default function BattlePage() {
                 <div className='grid grid-cols-2 gap-32 items-center items-justify mt-6'>
                     <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
                         <div className={`flex items-center max-h-full justify-center ${character1 === isLoser ? 'opacity-45 filter grayscale' : ''}`}>
-                            <Image
-                                src={char1Photo}
+                            {char1Photo ? (<Image
+                                src={char1Photo!}
                                 alt="Character Image"
                                 width={200}
                                 height={200}
                                 layout="intrinsic"
                                 objectFit="contain"
                                 className="custom-alt-image"
-                            />
+                            />) : (<Image
+                                src={altImage1!}
+                                alt="Character Image"
+                                width={200}
+                                height={200}
+                                layout="intrinsic"
+                                objectFit="contain"
+                                className="custom-alt-image"
+                            />)}
+
                         </div>
                     </div>
                     <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
                         <div className={`flex items-center max-h-full justify-center ${character2 === isLoser ? 'opacity-45 filter grayscale' : ''}`}>
-                            <Image
-                                src={char2Photo}
+                            {char2Photo ? (<Image
+                                src={char2Photo!}
                                 alt="Character Image"
                                 width={200}
                                 height={200}
                                 layout="intrinsic"
                                 objectFit="contain"
                                 className="custom-alt-image"
-                            />
+                            />) : (<Image
+                                src={altImage2!}
+                                alt="Character Image"
+                                width={200}
+                                height={200}
+                                layout="intrinsic"
+                                objectFit="contain"
+                                className="custom-alt-image"
+                            />)}
                         </div>
                     </div>
                 </div>
