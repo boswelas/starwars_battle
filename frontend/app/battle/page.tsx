@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { battle, getCharImage, scrapeCharImage } from '../lib/api';
+import { battle, getCharImage, scrapeCharImage } from '../apis/api';
 import Loading from './loading';
 import Link from 'next/link';
 import Image from 'next/image';

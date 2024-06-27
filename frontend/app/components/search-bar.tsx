@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import GetCharacterDetails from './character-details';
-import { fetchAllCharacters, fetchCharacterDetails, getCharImage } from '../lib/api';
+import { fetchAllCharacters, fetchCharacterDetails, getCharImage } from '../apis/api';
 import Image from 'next/image';
 
 
