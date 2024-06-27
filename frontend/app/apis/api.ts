@@ -1,6 +1,6 @@
 
 
-const API_URL = "http://127.0.0.1:5000/"
+const API_URL = "postgresql://postgres:ssCqOjIsyxDQaIPXdLzGsQPfYDmIXPpM@viaduct.proxy.rlwy.net:55863/railway/"
 
 export const fetchAllCharacters = async (): Promise<string[]> => {
     try {

@@ -1,9 +1,9 @@
 {
   "devDependencies": {
-    "prisma": "^5.11.0"
+    "prisma": "^5.16.1"
   },
   "dependencies": {
-    "openai": "^4.52.0",
+    "openai": "^4.52.1",
     "playwright": "^1.44.1"
   }
 }
