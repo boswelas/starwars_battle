@@ -1,6 +1,6 @@
 
 
-const API_URL = "postgresql://postgres:ssCqOjIsyxDQaIPXdLzGsQPfYDmIXPpM@viaduct.proxy.rlwy.net:55863/railway/"
+const API_URL = "https://starwarsbattle-production.up.railway.app/"
 
 export const fetchAllCharacters = async (): Promise<string[]> => {
     try {
