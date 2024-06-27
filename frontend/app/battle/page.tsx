@@ -16,7 +16,7 @@ export default function BattlePage() {
     const [loading, setLoading] = useState(true);
     const [showReference, setShowReference] = useState(false);
     const [battleReference, setBattleReference] = useState<string[] | null>(null);
-    const [isLoser, setLoser] = useState(character1)
+    const [isLoser, setLoser] = useState("")
     const [char1Photo, setChar1Photo] = useState("")
     const [char2Photo, setChar2Photo] = useState("")
 
@@ -37,9 +37,14 @@ export default function BattlePage() {
                 console.log("char1photo: ", char1Photo);
                 const char2 = await getCharImage(character2!);
                 setChar2Photo(char2.data);
-                setLoading(false)
-                console.log("battle ref: ", battleReference)
-            } catch (error: any) {
+                if (result.data[0][0] && result.data[0][0].length > 0) {
+                    const lastItem = result.data[0][0][result.data[0][0].length - 1];
+                    setLoser(lastItem);
+                }
+                setLoading(false);
+                console.log("battle ref: ", battleReference);
+            }
+            catch (error: any) {
                 setError(error.message);
                 setBattle(null);
             }
@@ -111,7 +116,7 @@ export default function BattlePage() {
                         </button>
                         <p className='text-lg text-[#FFFF00]'>These are the results from the battle calculator, which were given to ChatGPT to generate the story above.</p>
                         <ul className="list-disc list-inside">
-                            {battleReference!.map((result, index) => (
+                            {battleReference!.slice(0, -1).map((result, index) => (
                                 <li key={index}>{result}</li>
                             ))}
                         </ul>

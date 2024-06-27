@@ -69,12 +69,16 @@ def battle(character1_data, character2_data):
 
     if character1.health > 0 and character2.health <= 0:
         battle_play.append(f"{character1.name} wins!")
+        battle_play.append(f"{character2.name}")
     elif character2.health > 0 and character1.health <= 0:
         battle_play.append(f"{character2.name} wins!")
+        battle_play.append(f"{character1.name}")
     else:
         if character1.health > character2.health:
             battle_play.append(f"{character1.name} wins!")
+            battle_play.append(f"{character2.name}")
         else:
             battle_play.append(f"{character2.name} wins!")
+            battle_play.append(f"{character1.name}")
 
     return battle_play
