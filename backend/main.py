@@ -8,16 +8,10 @@ from battle_calculator import battle
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
 
 # Initialize Prisma Client
 db = Prisma()
-
-@app.after_request
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'  # Allow requests from any origin
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    return response
 
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
 async def fetch_characters():
