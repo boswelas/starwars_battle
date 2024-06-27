@@ -11,6 +11,13 @@ app = Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+def fetch_all_char():
+    response = jsonify({"message": "Your data here"})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+    return response
+
 
 # Initialize Prisma Client
 db = Prisma()
