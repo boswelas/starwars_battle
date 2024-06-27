@@ -12,10 +12,6 @@ CORS(app)
 # Initialize Prisma Client
 db = Prisma()
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
-
 @app.route('/fetch_all_char', methods=['GET'])
 async def fetch_characters():
     try:

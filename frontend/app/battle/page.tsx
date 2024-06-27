@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { battle } from '../lib/api';
+import { battle, getCharImage } from '../lib/api';
 import Loading from './loading';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,6 +16,10 @@ export default function BattlePage() {
     const [loading, setLoading] = useState(true);
     const [showReference, setShowReference] = useState(false);
     const [battleReference, setBattleReference] = useState<string[] | null>(null);
+    const [isLoser, setLoser] = useState(character1)
+    const [char1Photo, setChar1Photo] = useState("")
+    const [char2Photo, setChar2Photo] = useState("")
+
 
     function onClick() {
         setShowReference(!showReference)
@@ -28,6 +32,11 @@ export default function BattlePage() {
                 setBattle(result.data[1] || null);
                 setBattleReference(result.data[0][0] || null);
                 setError(null);
+                const char1 = await getCharImage(character1!);
+                setChar1Photo(char1.data);
+                console.log("char1photo: ", char1Photo);
+                const char2 = await getCharImage(character2!);
+                setChar2Photo(char2.data);
                 setLoading(false)
                 console.log("battle ref: ", battleReference)
             } catch (error: any) {
@@ -59,6 +68,34 @@ export default function BattlePage() {
                     </h1>
                     <h1 className='custom-heading2 lowercase'>{character1} and {character2}</h1>
                 </div>
+                <div className='grid grid-cols-2 gap-32 items-center items-justify mt-6'>
+                    <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
+                        <div className={`flex items-center max-h-full justify-center ${character1 === isLoser ? 'opacity-45 filter grayscale' : ''}`}>
+                            <Image
+                                src={char1Photo}
+                                alt="Character Image"
+                                width={200}
+                                height={200}
+                                layout="intrinsic"
+                                objectFit="contain"
+                                className="custom-alt-image"
+                            />
+                        </div>
+                    </div>
+                    <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
+                        <div className={`flex items-center max-h-full justify-center ${character2 === isLoser ? 'opacity-45 filter grayscale' : ''}`}>
+                            <Image
+                                src={char2Photo}
+                                alt="Character Image"
+                                width={200}
+                                height={200}
+                                layout="intrinsic"
+                                objectFit="contain"
+                                className="custom-alt-image"
+                            />
+                        </div>
+                    </div>
+                </div>
                 <div className="mt-10 mb-10 w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center bg-black">
                     <ul className="list-disc list-inside">
                         {battleDetails}
@@ -83,7 +120,7 @@ export default function BattlePage() {
                     View Battle Reference
                 </button>)}
             </div>
-        </div>
+        </div >
     );
 }
 
