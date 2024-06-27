@@ -1,5 +1,5 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
+import { notFound, redirect, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { battle, getCharImage, scrapeCharImage } from '../apis/api';
 import Loading from './loading';
@@ -33,6 +33,9 @@ export default function BattlePage() {
         const fetchBattle = async () => {
             try {
                 const result = await battle(character1!, character2!);
+                if (!character1 || !character2) {
+                    return notFound();
+                }
                 setBattle(result.data[1] || null);
                 setBattleReference(result.data[0][0] || null);
                 setError(null);
