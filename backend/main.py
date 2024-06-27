@@ -13,7 +13,7 @@ CORS(app)
 # Initialize Prisma Client
 db = Prisma()
 
-@app.route('/fetch_all_char', methods=['GET'])
+@app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
 async def fetch_characters():
     try:
         await db.connect()
@@ -28,7 +28,7 @@ async def fetch_characters():
         await db.disconnect()
     return jsonify(char_names)  
 
-@app.route('/fetch_char', methods=['GET'])
+@app.route('/fetch_char', methods=['GET', 'OPTIONS'])
 async def fetch_character():
     char_name = request.args.get('char_name')
     if not char_name:
@@ -51,7 +51,7 @@ async def fetch_character():
         await db.disconnect()
     return jsonify(data=char_data_dict)
 
-@app.route('/get_char_deets', methods=['GET'])
+@app.route('/get_char_deets', methods=['GET', 'OPTIONS'])
 async def get_details():
     char_name = request.args.get('char_name')
     if char_name:
@@ -61,7 +61,7 @@ async def get_details():
         return jsonify(error="Character details not found"), 404
     return jsonify(error="No character name provided"), 400
 
-@app.route('/get_char_image', methods=['GET'])
+@app.route('/get_char_image', methods=['GET', 'OPTIONS'])
 async def get_image():
     char_name = request.args.get('char_name')
     if not char_name:
@@ -83,7 +83,7 @@ async def get_image():
         await db.disconnect()
     return jsonify(data=char_data.image)
 
-@app.route('/character_battle', methods=['GET'])
+@app.route('/character_battle', methods=['GET', 'OPTIONS'])
 async def get_battle():
     character1 = request.args.get('character1')
     character2 = request.args.get('character2')
@@ -108,7 +108,7 @@ async def get_battle():
         await db.disconnect()
     return jsonify(data=battle_all)
 
-@app.route('/scrape_image', methods=['GET'])
+@app.route('/scrape_image', methods=['GET', 'OPTIONS'])
 async def get_scrape_image():
     char_name = request.args.get('char_name')
     if char_name:
