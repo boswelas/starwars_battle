@@ -2,7 +2,7 @@
     "services": {
         "backend": {
             "buildCommand": "npm install && npx prisma generate",
-            "startCommand": "npm start"
+            "startCommand": "python main.py"
         }
     }
 }
