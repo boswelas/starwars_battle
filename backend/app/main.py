@@ -145,7 +145,6 @@ cors = CORS(app, resources={
         "origins": "*",
         "methods": "*",
         "allow_headers": "*",
-        "Access-Control-Allow-Origin": "*",
         "supports_credentials": True
     }
 })
