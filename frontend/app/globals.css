@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'StJedise';
   src: url('/fonts/stjedise.ttf') format('truetype');
   font-weight: normal;
@@ -10,7 +10,7 @@
   src: url('/fonts/starjedi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 @tailwind base;
 @tailwind components;
@@ -78,13 +78,13 @@ body {
   }
 
   .custom-heading {
-    font-family: 'StJedise', sans-serif;
+    /* font-family: 'StJedise', sans-serif; */
     font-weight: bold;
     font-size: 4rem;
   }
 
   .custom-heading2 {
-    font-family: 'StarJedi', sans-serif;
+    /* font-family: 'StarJedi', sans-serif; */
     font-weight: 100;
     font-size: 2rem;
   }
