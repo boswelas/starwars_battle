@@ -18,6 +18,12 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
 # Verify Node.js and npm installation
 RUN node -v && npm -v
 
+# Install npx explicitly
+RUN npm install -g npx
+
+# Verify npx installation
+RUN npx -v
+
 # Install Prisma CLI globally using npm
 RUN npm install -g prisma
 
@@ -31,7 +37,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Initialize Prisma and generate client
-RUN prisma generate
+RUN npx prisma generate
 
 # Expose the port the app runs on
 EXPOSE 5000
