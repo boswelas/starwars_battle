@@ -137,11 +137,10 @@ import psycopg2
 import psycopg2.extras
 from battle_calculator import battle
 
-# Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
+CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app", "methods": ["GET", "POST", "OPTIONS"]}})
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
@@ -150,7 +149,7 @@ def get_db_connection():
     return conn
 
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
-async def fetch_characters():
+def fetch_characters():
     conn = get_db_connection()
     try:
         cur = conn.cursor()
@@ -165,7 +164,7 @@ async def fetch_characters():
     return jsonify(char_names)
 
 @app.route('/fetch_char', methods=['GET', 'OPTIONS'])
-async def fetch_character():
+def fetch_character():
     char_name = request.args.get('char_name')
     if not char_name:
         return jsonify(error="Character name is required"), 400
@@ -185,17 +184,17 @@ async def fetch_character():
     return jsonify(data=char_data_dict)
 
 @app.route('/get_char_deets', methods=['GET', 'OPTIONS'])
-async def get_details():
+def get_details():
     char_name = request.args.get('char_name')
     if char_name:
-        char_details = await get_char_details(char_name)
+        char_details = get_char_details(char_name) 
         if char_details:
             return jsonify(data=char_details)
         return jsonify(error="Character details not found"), 404
     return jsonify(error="No character name provided"), 400
 
 @app.route('/get_char_image', methods=['GET', 'OPTIONS'])
-async def get_image():
+def get_image():
     char_name = request.args.get('char_name')
     if not char_name:
         return jsonify(error="Character name is required"), 400
@@ -214,7 +213,7 @@ async def get_image():
     return jsonify(data=char_data['image'])
 
 @app.route('/character_battle', methods=['GET', 'OPTIONS'])
-async def get_battle():
+def get_battle():
     character1 = request.args.get('character1')
     character2 = request.args.get('character2')
 
@@ -242,10 +241,10 @@ async def get_battle():
     return jsonify(data=battle_all)
 
 @app.route('/scrape_image', methods=['GET', 'OPTIONS'])
-async def get_scrape_image():
+def get_scrape_image():
     char_name = request.args.get('char_name')
     if char_name:
-        image = await scrape_char_image(char_name)
+        image = scrape_char_image(char_name)  
         if image:
             return jsonify(data=image)
         return jsonify(error="Character details not found"), 404
