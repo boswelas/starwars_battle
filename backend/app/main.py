@@ -142,10 +142,21 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+app.config['DATABASE_HOST'] = os.getenv('DB_HOST')
+app.config['DATABASE_PORT'] = os.getenv('DB_PORT')
+app.config['DATABASE_NAME'] = os.getenv('DB_NAME')
+app.config['DATABASE_USER'] = os.getenv('DB_USER')
+app.config['DATABASE_PASSWORD'] = os.getenv('DB_PASS')
 
 def get_db_connection():
-    conn = psycopg2.connect(DATABASE_URL, cursor_factory=psycopg2.extras.DictCursor)
+    conn = psycopg2.connect(
+        host=app.config['DATABASE_HOST'],
+        port=app.config['DATABASE_PORT'],
+        dbname=app.config['DATABASE_NAME'],
+        user=app.config['DATABASE_USER'],
+        password=app.config['DATABASE_PASSWORD'],
+        cursor_factory=psycopg2.extras.DictCursor
+    )
     return conn
 
 @app.route('/')
@@ -158,7 +169,7 @@ def fetch_characters():
     conn = get_db_connection()
     try:
         cur = conn.cursor()
-        cur.execute("SELECT name FROM Character")
+        cur.execute('SELECT name FROM "Character"')
         char_data = cur.fetchall()
         char_names = sorted([char['name'] for char in char_data])
     except Exception as e:
@@ -176,7 +187,7 @@ def fetch_character():
     conn = get_db_connection()
     try:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM Character WHERE name = %s", (char_name,))
+        cur.execute('SELECT * FROM "Character" WHERE name = %s', (char_name,))
         char_data = cur.fetchone()
         if not char_data:
             return jsonify(error="Character not found"), 404
@@ -206,7 +217,7 @@ def get_image():
     conn = get_db_connection()
     try:
         cur = conn.cursor()
-        cur.execute("SELECT image FROM Character WHERE name = %s", (char_name,))
+        cur.execute('SELECT image FROM "Character" WHERE name = %s', (char_name,))
         char_data = cur.fetchone()
         if not char_data:
             return jsonify(error="Character image not found"), 404
@@ -227,11 +238,11 @@ def get_battle():
     conn = get_db_connection()
     try:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM Character WHERE name = %s", (character1,))
+        cur.execute('SELECT * FROM "Character" WHERE name = %s', (character1,))
         char1_data = cur.fetchone()
         if not char1_data:
             return jsonify(error="Character1 not found"), 404
-        cur.execute("SELECT * FROM Character WHERE name = %s", (character2,))
+        cur.execute('SELECT * FROM "Character" WHERE name = %s', (character2,))
         char2_data = cur.fetchone()
         if not char2_data:
             return jsonify(error="Character2 not found"), 404
