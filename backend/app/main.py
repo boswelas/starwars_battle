@@ -148,6 +148,11 @@ def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL, cursor_factory=psycopg2.extras.DictCursor)
     return conn
 
+@app.route('/')
+def index():
+    print("Server is running!")
+    return jsonify("Welcome to the backend!")
+
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
 def fetch_characters():
     conn = get_db_connection()
@@ -251,5 +256,4 @@ def get_scrape_image():
     return jsonify(error="No character name provided"), 400
 
 if __name__ == '__main__':
-    # app.run(debug=True, host='0.0.0.0')
-    app.run()
+    app.run(debug=True, host='0.0.0.0')

@@ -2,10 +2,7 @@ const API_URL = "https://starwarsbattle-production.up.railway.app"
 
 export const fetchAllCharacters = async (): Promise<string[]> => {
     try {
-        const response = await fetch(`${API_URL}/fetch_all_char`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        });
+        const response = await fetch(`${API_URL}/fetch_all_char`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
