@@ -5,23 +5,18 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from prisma import Prisma
 from battle_calculator import battle
+import asyncio
+
 
 
 app = Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-def fetch_all_char():
-    response = jsonify({"message": "Your data here"})
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-    return response
 
-
-# Initialize Prisma Client
 db = Prisma()
 
+    
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
 async def fetch_characters():
     try:
@@ -42,9 +37,8 @@ async def fetch_character():
     char_name = request.args.get('char_name')
     if not char_name:
         return jsonify(error="Character name is required"), 400
-
-    await db.connect()
     try:
+        await db.connect()
         char_data = await db.character.find_first(
             where={
                 'name': char_name
