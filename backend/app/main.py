@@ -130,7 +130,7 @@ from char_image_scrape import scrape_char_image
 from chat_response import chat_response
 from char_detail_scrape import get_char_details
 from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 import psycopg2
@@ -149,7 +149,6 @@ def get_db_connection():
     return conn
 
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
-@cross_origin()
 def fetch_characters():
     conn = get_db_connection()
     try:
@@ -165,7 +164,6 @@ def fetch_characters():
     return jsonify(char_names)
 
 @app.route('/fetch_char', methods=['GET', 'OPTIONS'])
-@cross_origin()
 def fetch_character():
     char_name = request.args.get('char_name')
     if not char_name:
@@ -186,7 +184,6 @@ def fetch_character():
     return jsonify(data=char_data_dict)
 
 @app.route('/get_char_deets', methods=['GET', 'OPTIONS'])
-@cross_origin()
 def get_details():
     char_name = request.args.get('char_name')
     if char_name:
@@ -197,7 +194,6 @@ def get_details():
     return jsonify(error="No character name provided"), 400
 
 @app.route('/get_char_image', methods=['GET', 'OPTIONS'])
-@cross_origin()
 def get_image():
     char_name = request.args.get('char_name')
     if not char_name:
@@ -217,7 +213,6 @@ def get_image():
     return jsonify(data=char_data['image'])
 
 @app.route('/character_battle', methods=['GET', 'OPTIONS'])
-@cross_origin()
 def get_battle():
     character1 = request.args.get('character1')
     character2 = request.args.get('character2')
@@ -246,7 +241,6 @@ def get_battle():
     return jsonify(data=battle_all)
 
 @app.route('/scrape_image', methods=['GET', 'OPTIONS'])
-@cross_origin()
 def get_scrape_image():
     char_name = request.args.get('char_name')
     if char_name:
