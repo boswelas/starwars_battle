@@ -140,14 +140,15 @@ from battle_calculator import battle
 load_dotenv()
 
 app = Flask(__name__)
-# cors = CORS(app, resources={
-#     r"/api/*": {
-#         "origins": ["https://starwars-battle.vercel.app"],
-#         "methods": ["GET", "POST", "PUT", "DELETE"],
-#         "allow_headers": ["Content-Type", "Authorization"],
-#         "supports_credentials": True
-#     }
-# })
+cors = CORS(app, resources={
+    r"/api/*": {
+        "origins": "*",
+        "methods": "*",
+        "allow_headers": "*",
+        "Access-Control-Allow-Origin": "*",
+        "supports_credentials": True
+    }
+})
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
