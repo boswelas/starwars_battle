@@ -140,13 +140,7 @@ from battle_calculator import battle
 load_dotenv()
 
 app = Flask(__name__)
-cors = CORS(app, resources={
-    r"/api/*": {
-        "origins": "*",
-        "methods": "*",
-        "allow_headers": "*",
-    }
-})
+cors = CORS(app)
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
