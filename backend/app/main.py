@@ -46,21 +46,20 @@ def index():
 
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
 def fetch_characters():
-    # if request.method == 'OPTIONS':
-    #     return '', 204 
-    # conn = get_db_connection()
-    # try:
-    #     cur = conn.cursor()
-    #     cur.execute('SELECT name FROM "Character"')
-    #     char_data = cur.fetchall()
-    #     char_names = sorted([char['name'] for char in char_data])
-    # except Exception as e:
-    #     print(f"Error retrieving all characters: {e}")
-    #     return jsonify(error="Internal server error"), 500
-    # finally:
-    #     conn.close()
-    # return jsonify(char_names)
-    return jsonify(['A', 'B', 'C'])
+    if request.method == 'OPTIONS':
+        return '', 204 
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute('SELECT name FROM "Character"')
+        char_data = cur.fetchall()
+        char_names = sorted([char['name'] for char in char_data])
+    except Exception as e:
+        print(f"Error retrieving all characters: {e}")
+        return jsonify(error="Internal server error"), 500
+    finally:
+        conn.close()
+    return jsonify(char_names)
 
 @app.route('/fetch_char', methods=['GET', 'OPTIONS'])
 def fetch_character():
