@@ -12,6 +12,7 @@ async def get_char_details(name):
     print("formatted name:", formatted_name)
     url = f"https://starwars.fandom.com/wiki/{formatted_name}"
 
+
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()
         print("opened browser")
