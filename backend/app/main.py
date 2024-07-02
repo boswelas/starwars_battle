@@ -13,21 +13,15 @@ from battle_calculator import battle
 load_dotenv()
 
 app = Flask(__name__)
-# CORS(app, resources={r"/*": {"origins": "*"}})
-CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-# @app.after_request
-# def add_cors_headers(response):
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-#     return response
 @app.after_request
 def add_cors_headers(response):
-    response.headers.add('Access-Control-Allow-Origin', 'https://starwars-battle.vercel.app')
+    response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     return response
+
 
 app.config['DATABASE_HOST'] = os.getenv('DB_HOST')
 app.config['DATABASE_PORT'] = os.getenv('DB_PORT')
@@ -53,21 +47,18 @@ def index():
 
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
 def fetch_characters():
-    if request.method == 'OPTIONS':
-        return '', 204
-    elif request.method == 'GET': 
-        conn = get_db_connection()
-        try:
-            cur = conn.cursor()
-            cur.execute('SELECT name FROM "Character"')
-            char_data = cur.fetchall()
-            char_names = sorted([char['name'] for char in char_data])
-        except Exception as e:
-            print(f"Error retrieving all characters: {e}")
-            return jsonify(error="Internal server error"), 500
-        finally:
-            conn.close()
-        return jsonify(char_names)
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute('SELECT name FROM "Character"')
+        char_data = cur.fetchall()
+        char_names = sorted([char['name'] for char in char_data])
+    except Exception as e:
+        print(f"Error retrieving all characters: {e}")
+        return jsonify(error="Internal server error"), 500
+    finally:
+        conn.close()
+    return jsonify(char_names)
 
 @app.route('/fetch_char', methods=['GET', 'OPTIONS'])
 def fetch_character():
