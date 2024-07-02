@@ -16,7 +16,8 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 DATABASE_HOST = os.getenv('DB_HOST')
-DATABASE_PORT = os.getenv('DB_PORT')
+# DATABASE_PORT = os.getenv('DB_PORT')
+DATABASE_PORT = 55863
 DATABASE_NAME = os.getenv('DB_NAME')
 DATABASE_USER = os.getenv('DB_USER')
 DATABASE_PASSWORD = os.getenv('DB_PASS')
