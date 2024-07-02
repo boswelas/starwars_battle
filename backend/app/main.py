@@ -15,11 +15,11 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-app.config['DATABASE_HOST'] = os.getenv('DB_HOST')
-app.config['DATABASE_PORT'] = os.getenv('DB_PORT', default=5432)
-app.config['DATABASE_NAME'] = os.getenv('DB_NAME')
-app.config['DATABASE_USER'] = os.getenv('DB_USER')
-app.config['DATABASE_PASSWORD'] = os.getenv('DB_PASS')
+DATABASE_HOST = os.getenv('DB_HOST')
+DATABASE_PORT = os.getenv('DB_PORT', default=5432)
+DATABASE_NAME = os.getenv('DB_NAME')
+DATABASE_USER = os.getenv('DB_USER')
+DATABASE_PASSWORD = os.getenv('DB_PASS')
 
 
 
@@ -32,12 +32,12 @@ def add_cors_headers(response):
 
 def get_db_connection():
     conn = psycopg2.connect(
-        host=app.config['DATABASE_HOST'],
-        port=app.config['DATABASE_PORT'],
-        dbname=app.config['DATABASE_NAME'],
-        user=app.config['DATABASE_USER'],
-        password=app.config['DATABASE_PASSWORD'],
-        cursor_factory=psycopg2.extras.DictCursor
+        dbname=DATABASE_NAME,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+        # cursor_factory=psycopg2.extras.DictCursor
     )
     return conn
 
