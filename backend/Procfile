@@ -1,1 +1,1 @@
-web: ./setup.sh && PYTHONPATH=./app gunicorn app.main:app
+web: python -m playwright install && PYTHONPATH=./app gunicorn app.main:app
