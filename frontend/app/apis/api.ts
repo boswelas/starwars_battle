@@ -1,5 +1,5 @@
-const API_URL = "https://starwarsbattle-production.up.railway.app"
-// const API_URL = "http://127.0.0.1:5000"
+// const API_URL = "https://starwarsbattle-production.up.railway.app"
+const API_URL = "http://127.0.0.1:5000"
 
 export const fetchAllCharacters = async (): Promise<string[]> => {
     try {
