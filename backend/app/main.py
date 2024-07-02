@@ -16,7 +16,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config['DATABASE_HOST'] = os.getenv('DB_HOST')
-# app.config['DATABASE_PORT'] = int(os.getenv('DB_PORT').strip())
+app.config['DATABASE_PORT'] = int(os.getenv('DB_PORT').strip())
 app.config['DATABASE_NAME'] = os.getenv('DB_NAME')
 app.config['DATABASE_USER'] = os.getenv('DB_USER')
 app.config['DATABASE_PASSWORD'] = os.getenv('DB_PASS')
@@ -33,7 +33,7 @@ def add_cors_headers(response):
 def get_db_connection():
     conn = psycopg2.connect(
         host=app.config['DATABASE_HOST'],
-        port=app.config['55863'],
+        port=app.config['DATABASE_PORT'],
         dbname=app.config['DATABASE_NAME'],
         user=app.config['DATABASE_USER'],
         password=app.config['DATABASE_PASSWORD'],
