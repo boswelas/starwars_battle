@@ -16,7 +16,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 DATABASE_HOST = os.getenv('DB_HOST')
-DATABASE_PORT = os.getenv('DB_PORT', default=5432)
+DATABASE_PORT = int(os.getenv('DB_PORT', default=5432))
 DATABASE_NAME = os.getenv('DB_NAME')
 DATABASE_USER = os.getenv('DB_USER')
 DATABASE_PASSWORD = os.getenv('DB_PASS')
@@ -30,7 +30,10 @@ def add_cors_headers(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     return response
 
+print(f"Connecting to database: host={DATABASE_HOST}, port={DATABASE_PORT}, dbname={DATABASE_NAME}, user={DATABASE_USER}")
+
 def get_db_connection():
+    print(f"in get_db_connection()")
     conn = psycopg2.connect(
         dbname=DATABASE_NAME, 
         user=DATABASE_USER,
