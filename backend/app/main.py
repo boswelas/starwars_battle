@@ -68,6 +68,8 @@ def fetch_characters():
 
 @app.route('/fetch_char', methods=['GET', 'OPTIONS'])
 def fetch_character():
+    if request.method == 'OPTIONS':
+        return '', 204 
     char_name = request.args.get('char_name')
     if not char_name:
         return jsonify(error="Character name is required"), 400
@@ -88,6 +90,8 @@ def fetch_character():
 
 @app.route('/get_char_deets', methods=['GET', 'OPTIONS'])
 def get_details():
+    if request.method == 'OPTIONS':
+        return '', 204 
     char_name = request.args.get('char_name')
     if char_name:
         char_details = asyncio.run(get_char_details(char_name))
@@ -98,6 +102,8 @@ def get_details():
 
 @app.route('/get_char_image', methods=['GET', 'OPTIONS'])
 def get_image():
+    if request.method == 'OPTIONS':
+        return '', 204 
     char_name = request.args.get('char_name')
     if not char_name:
         return jsonify(error="Character name is required"), 400
@@ -117,6 +123,8 @@ def get_image():
 
 @app.route('/character_battle', methods=['GET', 'OPTIONS'])
 def get_battle():
+    if request.method == 'OPTIONS':
+        return '', 204 
     character1 = request.args.get('character1')
     print(f"char 1 is ", character1)
     character2 = request.args.get('character2')
@@ -151,6 +159,8 @@ def get_battle():
 
 @app.route('/scrape_image', methods=['GET', 'OPTIONS'])
 def get_scrape_image():
+    if request.method == 'OPTIONS':
+        return '', 204 
     char_name = request.args.get('char_name')
     if char_name:
         image = asyncio.run(scrape_char_image(char_name))  
