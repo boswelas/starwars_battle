@@ -55,7 +55,7 @@ def fetch_characters():
         return '', 204 
     conn = get_db_connection()
     try:
-        cur = conn.cursor()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         cur.execute('SELECT name FROM "Character"')
         char_data = cur.fetchall()
         char_names = sorted([char['name'] for char in char_data])
@@ -73,7 +73,7 @@ def fetch_character():
         return jsonify(error="Character name is required"), 400
     conn = get_db_connection()
     try:
-        cur = conn.cursor()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         cur.execute('SELECT * FROM "Character" WHERE name = %s', (char_name,))
         char_data = cur.fetchone()
         if not char_data:
@@ -103,7 +103,7 @@ def get_image():
         return jsonify(error="Character name is required"), 400
     conn = get_db_connection()
     try:
-        cur = conn.cursor()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         cur.execute('SELECT image FROM "Character" WHERE name = %s', (char_name,))
         char_data = cur.fetchone()
         if not char_data:
@@ -125,7 +125,7 @@ def get_battle():
         return jsonify(error="Characters are required"), 400
     conn = get_db_connection()
     try:
-        cur = conn.cursor()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         cur.execute('SELECT * FROM "Character" WHERE name = %s', (character1,))
         char1_data = cur.fetchone()
         print(f"char1 data: ", char1_data)
