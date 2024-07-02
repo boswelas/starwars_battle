@@ -15,19 +15,18 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+app.config['DATABASE_HOST'] = os.getenv('DB_HOST')
+app.config['DATABASE_PORT'] = os.getenv('DB_PORT')
+app.config['DATABASE_NAME'] = os.getenv('DB_NAME')
+app.config['DATABASE_USER'] = os.getenv('DB_USER')
+app.config['DATABASE_PASSWORD'] = os.getenv('DB_PASS')
+
 @app.after_request
 def add_cors_headers(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     return response
-
-
-app.config['DATABASE_HOST'] = os.getenv('DB_HOST')
-app.config['DATABASE_PORT'] = os.getenv('DB_PORT')
-app.config['DATABASE_NAME'] = os.getenv('DB_NAME')
-app.config['DATABASE_USER'] = os.getenv('DB_USER')
-app.config['DATABASE_PASSWORD'] = os.getenv('DB_PASS')
 
 def get_db_connection():
     conn = psycopg2.connect(
@@ -47,6 +46,8 @@ def index():
 
 @app.route('/fetch_all_char', methods=['GET', 'OPTIONS'])
 def fetch_characters():
+    if request.method == 'OPTIONS':
+        return '', 204 
     conn = get_db_connection()
     try:
         cur = conn.cursor()
@@ -153,5 +154,5 @@ def get_scrape_image():
         return jsonify(error="Character details not found"), 404
     return jsonify(error="No character name provided"), 400
 
-# if __name__ == '__main__':
-#     app.run(debug=True, host='0.0.0.0')
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
