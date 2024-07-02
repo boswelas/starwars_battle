@@ -36,7 +36,7 @@ def get_db_connection():
         user=DATABASE_USER,
         password=DATABASE_PASSWORD,
         host=DATABASE_HOST,
-        port=DATABASE_PORT,
+        # port=DATABASE_PORT,
         cursor_factory=psycopg2.extras.DictCursor
     )
     return conn
