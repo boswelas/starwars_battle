@@ -31,13 +31,7 @@ def add_cors_headers(response):
     return response
 
 def get_db_connection():
-    conn = psycopg2.connect(
-        dbname=DATABASE_NAME,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        # port=DATABASE_PORT,
-        cursor_factory=psycopg2.extras.DictCursor
+    conn = psycopg2.connect("dbname='DATABASE_NAME' user='DATABASE_USER' password='DATABASE_PASSWORD'host='DATABASE_HOST' port='DATABASE_PORT' cursor_factory='psycopg2.extras.DictCursor'"
     )
     return conn
 
