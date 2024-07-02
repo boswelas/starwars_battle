@@ -7,7 +7,8 @@ export const fetchAllCharacters = async (): Promise<string[]> => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            mode: 'cors'
         });
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -30,7 +31,13 @@ export const fetchCharacter = async (char_name: string): Promise<any> => {
     console.log("trying to fetch char");
     try {
         console.log("trying!");
-        const response = await fetch(`${API_URL}/fetch_char?char_name=${encodeURIComponent(char_name)}`);
+        const response = await fetch(`${API_URL}/fetch_char?char_name=${encodeURIComponent(char_name)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -44,7 +51,13 @@ export const fetchCharacter = async (char_name: string): Promise<any> => {
 
 export const battle = async (character1: string, character2: string): Promise<any> => {
     try {
-        const response = await fetch(`${API_URL}/character_battle?character1=${encodeURIComponent(character1)}&character2=${encodeURIComponent(character2)}`);
+        const response = await fetch(`${API_URL}/character_battle?character1=${encodeURIComponent(character1)}&character2=${encodeURIComponent(character2)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -59,7 +72,13 @@ export const battle = async (character1: string, character2: string): Promise<an
 
 export const fetchCharacterDetails = async (char_name: string): Promise<any> => {
     try {
-        const response = await fetch(`${API_URL}/get_char_deets?char_name=${encodeURIComponent(char_name)}`);
+        const response = await fetch(`${API_URL}/get_char_deets?char_name=${encodeURIComponent(char_name)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -73,7 +92,13 @@ export const fetchCharacterDetails = async (char_name: string): Promise<any> => 
 
 export const getCharImage = async (char_name: string): Promise<any> => {
     try {
-        const response = await fetch(`${API_URL}/get_char_image?char_name=${encodeURIComponent(char_name)}`);
+        const response = await fetch(`${API_URL}/get_char_image?char_name=${encodeURIComponent(char_name)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -87,7 +112,13 @@ export const getCharImage = async (char_name: string): Promise<any> => {
 
 export const battle_calc = async (character1: string, character2: string): Promise<any> => {
     try {
-        const response = await fetch(`${API_URL}/calculate_battle?character1=${encodeURIComponent(character1)}&character2=${encodeURIComponent(character2)}`);
+        const response = await fetch(`${API_URL}/calculate_battle?character1=${encodeURIComponent(character1)}&character2=${encodeURIComponent(character2)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -102,7 +133,13 @@ export const battle_calc = async (character1: string, character2: string): Promi
 
 export const scrapeCharImage = async (char_name: string): Promise<any> => {
     try {
-        const response = await fetch(`${API_URL}/scrape_image?char_name=${encodeURIComponent(char_name)}`);
+        const response = await fetch(`${API_URL}/scrape_image?char_name=${encodeURIComponent(char_name)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

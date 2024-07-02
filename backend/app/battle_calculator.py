@@ -3,26 +3,26 @@ import random
 
 def battle(character1_data, character2_data):
     character1 = Character(
-        name=character1_data.name,
-        image=character1_data.image,
-        range=character1_data.range,
-        base_atk=character1_data.base_atk,
-        base_def=character1_data.base_def,
-        max_atk=character1_data.max_atk,
-        max_def=character1_data.max_def,
-        acc=character1_data.acc,
-        eva=character1_data.eva
+        name=character1_data[1],
+        image=character1_data[2],
+        range=character1_data[3],
+        base_atk=character1_data[4],
+        base_def=character1_data[5],
+        max_atk=character1_data[6],
+        max_def=character1_data[7],
+        acc=character1_data[8],
+        eva=character1_data[9]
     )
     character2 = Character(
-        name=character2_data.name,
-        image=character2_data.image,
-        range=character2_data.range,
-        base_atk=character2_data.base_atk,
-        base_def=character2_data.base_def,
-        max_atk=character2_data.max_atk,
-        max_def=character2_data.max_def,
-        acc=character2_data.acc,
-        eva=character2_data.eva
+        name=character2_data[1],
+        image=character2_data[2],
+        range=character2_data[3],
+        base_atk=character2_data[4],
+        base_def=character2_data[5],
+        max_atk=character2_data[6],
+        max_def=character2_data[7],
+        acc=character2_data[8],
+        eva=character2_data[9]
     )
     battle_play = []
     battle_play.append(f"Battle between {character1.name} and {character2.name}.")
