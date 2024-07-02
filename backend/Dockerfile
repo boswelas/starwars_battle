@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Playwright and its browsers
-RUN pip install playwright==1.28.1 && playwright install
+RUN pip install playwright==1.44.0 && playwright install
 
 # Copy the requirements file to the container
 COPY requirements.txt .
