@@ -33,7 +33,7 @@ def add_cors_headers(response):
 def get_db_connection():
     conn = psycopg2.connect(
         host=app.config['DATABASE_HOST'],
-        port=app.config[55863],
+        port=app.config['55863'],
         dbname=app.config['DATABASE_NAME'],
         user=app.config['DATABASE_USER'],
         password=app.config['DATABASE_PASSWORD'],
