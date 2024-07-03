@@ -3,6 +3,9 @@ import random
 
 def battle(character1_data, character2_data):
     print(f"in the battle function")
+    print(f"character1_data: ", character1_data)
+    print(f"character2_data: ", character2_data)
+
     character1 = Character(
         name=character1_data[1],
         image=character1_data[2],
