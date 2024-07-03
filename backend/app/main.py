@@ -147,7 +147,7 @@ def get_battle():
         print(f"going to calculate battle")
         calculate_battle = battle(char1_data, char2_data)
         print(f"calculated battle: ", calculate_battle)
-        battle_details = asyncio.run(chat_response(calculate_battle))
+        battle_details = chat_response(calculate_battle)
         print(f"battle details: ", battle_details)
         battle_all = [[calculate_battle], [battle_details]]
     except Exception as e:
