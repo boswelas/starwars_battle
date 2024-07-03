@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'StJedise';
-  src: url('/fonts/stjedise.ttf') format('truetype');
+  src: url('./fonts/stjedise.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Starjedi';
-  src: url('/fonts/starjedi.ttf') format('truetype');
+  src: url('./fonts/starjedi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -74,7 +74,8 @@ body {
   .custom-alt-image {
     max-width: 100%;
     max-height: 100%;
-
+    width: auto;
+    height: auto;
   }
 
   .custom-heading {
