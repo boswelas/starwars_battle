@@ -14,7 +14,7 @@ def chat_response(battle):
     messages=[
         {
             "role": "user",
-            "content": f"write a creative story with setting, weapons, battle to death or KO. maximum 8 sentences. use my winner. {battle_deets}",
+            "content": f"write a creative story with setting, weapons, battle to death or KO. maximum 8 sentences. you must stick to my winner: {battle_deets}",
         }
     ])
     return response.choices[0].message.content
