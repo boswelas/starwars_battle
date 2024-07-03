@@ -14,14 +14,14 @@ async def scrape_char_image(name):
     url = f"https://starwars.fandom.com/wiki/{formatted_name}"
 
     async with async_playwright() as pw:
-        # browser = await pw.chromium.launch()
-        # print("opened browser")
-        # page = await browser.new_page()
-        # print("new page")
-        browser = await pw.chromium.connect_over_cdp(os.environ['BROWSER_PLAYWRIGHT_ENDPOINT'])
+        browser = await pw.chromium.launch()
+        print("opened browser")
+        page = await browser.new_page()
+        print("new page")
+        # browser = await pw.chromium.connect_over_cdp(os.environ['BROWSER_PLAYWRIGHT_ENDPOINT'])
 
-        context = await browser.new_context()
-        page = await context.new_page()
+        # context = await browser.new_context()
+        # page = await context.new_page()
         try:
             await page.goto(url, wait_until='domcontentloaded')
             print("went to:", url)
