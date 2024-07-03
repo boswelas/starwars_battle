@@ -9,13 +9,12 @@ client = OpenAI(api_key=API_KEY)
 def chat_response(battle):
     battle_deets=[]
     battle_deets.append(battle[0])
-    battle_deets.append(battle[-1])
-    print(f"{battle_deets}")
+    battle_deets.append(battle[-2])
     response = client.chat.completions.create(model="gpt-3.5-turbo",
     messages=[
         {
             "role": "user",
-            "content": f"write a creative story with setting, weapons, battle to death or KO. maximum 8 sentences. you must stick to my winner: {battle_deets}",
+            "content": f"write a creative story with setting, weapons, battle to death or KO. maximum 8 sentences. {battle_deets}",
         }
     ])
     return response.choices[0].message.content
