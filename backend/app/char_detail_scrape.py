@@ -1,4 +1,5 @@
 import asyncio
+import os
 import re
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
@@ -14,10 +15,16 @@ async def get_char_details(name):
 
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch()
-        print("opened browser")
-        page = await browser.new_page()
-        print("new page")
+        browser = await pw.chromium.connect_over_cdp(os.environ['BROWSER_PLAYWRIGHT_ENDPOINT'])
+        print(f"opened browser")
+        context = await browser.new_context()
+        print(f"new context")
+        page = await context.new_page()
+        print(f"opened page")
+        # browser = await pw.chromium.launch()
+        # print("opened browser")
+        # page = await browser.new_page()
+        # print("new page")
         try:
             await page.goto(url, wait_until='domcontentloaded')
             print("went to:", url)
