@@ -2,9 +2,7 @@ from character import Character
 import random
 
 def battle(character1_data, character2_data):
-    print(f"in the battle function")
-    print(f"character1_data: ", character1_data)
-    print(f"character2_data: ", character2_data)
+
     character1 = Character(
         name=character1_data['name'],
         image=character1_data['image'],
@@ -17,8 +15,6 @@ def battle(character1_data, character2_data):
         eva=character1_data['eva']
     )
 
-    print(f"Made Character 1: {character1.name}")
-
     character2 = Character(
         name=character2_data['name'],
         image=character2_data['image'],
@@ -30,30 +26,6 @@ def battle(character1_data, character2_data):
         acc=character2_data['acc'],
         eva=character2_data['eva']
         )
-    # character1 = Character(
-    #     name=character1_data[1],
-    #     image=character1_data[2],
-    #     range=character1_data[3],
-    #     base_atk=character1_data[4],
-    #     base_def=character1_data[5],
-    #     max_atk=character1_data[6],
-    #     max_def=character1_data[7],
-    #     acc=character1_data[8],
-    #     eva=character1_data[9]
-    # )
-    # print(f"made Character 1: ", character1.name)
-    # character2 = Character(
-    #     name=character2_data[1],
-    #     image=character2_data[2],
-    #     range=character2_data[3],
-    #     base_atk=character2_data[4],
-    #     base_def=character2_data[5],
-    #     max_atk=character2_data[6],
-    #     max_def=character2_data[7],
-    #     acc=character2_data[8],
-    #     eva=character2_data[9]
-    # )
-    print(f"made Character 2: ", character2.name)
 
     battle_play = []
     battle_play.append(f"Battle between {character1.name} and {character2.name}.")

@@ -15,7 +15,6 @@ export const fetchAllCharacters = async (): Promise<string[]> => {
         }
         const data = await response.json();
         if (Array.isArray(data) && data.every(item => typeof item === 'string')) {
-            console.log("data is: ", data);
             return data;
         } else {
             console.error('Data is not an array of strings:', data);
@@ -28,9 +27,7 @@ export const fetchAllCharacters = async (): Promise<string[]> => {
 };
 
 export const fetchCharacter = async (char_name: string): Promise<any> => {
-    console.log("trying to fetch char");
     try {
-        console.log("trying!");
         const response = await fetch(`${API_URL}/fetch_char?char_name=${encodeURIComponent(char_name)}`, {
             method: 'GET',
             headers: {
@@ -62,7 +59,6 @@ export const battle = async (character1: string, character2: string): Promise<an
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error('Error fetching all characters:', error);
@@ -123,7 +119,6 @@ export const battle_calc = async (character1: string, character2: string): Promi
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error('Error fetching all characters:', error);

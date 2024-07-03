@@ -30,10 +30,7 @@ def add_cors_headers(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     return response
 
-print(f"Connecting to database: host={DATABASE_HOST}, port={DATABASE_PORT}, dbname={DATABASE_NAME}, user={DATABASE_USER}")
-
 def get_db_connection():
-    print(f"in get_db_connection()")
     conn = psycopg2.connect(
         dbname=DATABASE_NAME, 
         user=DATABASE_USER,
@@ -125,9 +122,7 @@ def get_battle():
     if request.method == 'OPTIONS':
         return '', 204 
     character1 = request.args.get('character1')
-    print(f"char 1 is ", character1)
     character2 = request.args.get('character2')
-    print(f"char 2 is ", character2) 
     if not (character1 and character2):
         return jsonify(error="Characters are required"), 400
     conn = get_db_connection()
@@ -135,20 +130,15 @@ def get_battle():
         cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         cur.execute('SELECT * FROM "Character" WHERE name = %s', (character1,))
         char1_data = cur.fetchone()
-        print(f"char1 data: ", char1_data)
         if not char1_data:
             return jsonify(error="Character1 not found"), 404
         cur.execute('SELECT * FROM "Character" WHERE name = %s', (character2,))
         char2_data = cur.fetchone()
-        print(f"char2 data: ", char2_data)
 
         if not char2_data:
             return jsonify(error="Character2 not found"), 404
-        print(f"going to calculate battle")
         calculate_battle = battle(char1_data, char2_data)
-        print(f"calculated battle: ", calculate_battle)
         battle_details = chat_response(calculate_battle)
-        print(f"battle details: ", battle_details)
         battle_all = [[calculate_battle], [battle_details]]
     except Exception as e:
         print(f"Error fetching characters: {e}")
