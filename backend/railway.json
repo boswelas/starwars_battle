@@ -3,7 +3,7 @@
     "build": {
         "nixpacksVersion": "1.14.0",
         "builder": "NIXPACKS",
-        "buildCommand": "playwright install"
+        "buildCommand": "playwright install && playwright install-deps"
     },
     "deploy": {
         "startCommand": "PYTHONPATH=app gunicorn app.main:app",
