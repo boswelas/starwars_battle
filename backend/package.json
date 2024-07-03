@@ -3,6 +3,7 @@
     "prisma": "^5.16.1"
   },
   "dependencies": {
+    "docker": "^0.2.14",
     "openai": "^4.52.1",
     "playwright": "^1.44.1"
   }
