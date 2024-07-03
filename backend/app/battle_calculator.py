@@ -5,30 +5,54 @@ def battle(character1_data, character2_data):
     print(f"in the battle function")
     print(f"character1_data: ", character1_data)
     print(f"character2_data: ", character2_data)
-
     character1 = Character(
-        name=character1_data[1],
-        image=character1_data[2],
-        range=character1_data[3],
-        base_atk=character1_data[4],
-        base_def=character1_data[5],
-        max_atk=character1_data[6],
-        max_def=character1_data[7],
-        acc=character1_data[8],
-        eva=character1_data[9]
+        name=character1_data['name'],
+        image=character1_data['image'],
+        range=character1_data['range'],
+        base_atk=character1_data['base_atk'],
+        base_def=character1_data['base_def'],
+        max_atk=character1_data['max_atk'],
+        max_def=character1_data['max_def'],
+        acc=character1_data['acc'],
+        eva=character1_data['eva']
     )
-    print(f"made Character 1: ", character1.name)
+
+    print(f"Made Character 1: {character1.name}")
+
     character2 = Character(
-        name=character2_data[1],
-        image=character2_data[2],
-        range=character2_data[3],
-        base_atk=character2_data[4],
-        base_def=character2_data[5],
-        max_atk=character2_data[6],
-        max_def=character2_data[7],
-        acc=character2_data[8],
-        eva=character2_data[9]
-    )
+        name=character2_data['name'],
+        image=character2_data['image'],
+        range=character2_data['range'],
+        base_atk=character2_data['base_atk'],
+        base_def=character2_data['base_def'],
+        max_atk=character2_data['max_atk'],
+        max_def=character2_data['max_def'],
+        acc=character2_data['acc'],
+        eva=character2_data['eva']
+        )
+    # character1 = Character(
+    #     name=character1_data[1],
+    #     image=character1_data[2],
+    #     range=character1_data[3],
+    #     base_atk=character1_data[4],
+    #     base_def=character1_data[5],
+    #     max_atk=character1_data[6],
+    #     max_def=character1_data[7],
+    #     acc=character1_data[8],
+    #     eva=character1_data[9]
+    # )
+    # print(f"made Character 1: ", character1.name)
+    # character2 = Character(
+    #     name=character2_data[1],
+    #     image=character2_data[2],
+    #     range=character2_data[3],
+    #     base_atk=character2_data[4],
+    #     base_def=character2_data[5],
+    #     max_atk=character2_data[6],
+    #     max_def=character2_data[7],
+    #     acc=character2_data[8],
+    #     eva=character2_data[9]
+    # )
     print(f"made Character 2: ", character2.name)
 
     battle_play = []
