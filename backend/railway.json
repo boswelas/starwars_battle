@@ -2,7 +2,8 @@
     "$schema": "https://railway.app/railway.schema.json",
     "build": {
         "nixpacksVersion": "1.14.0",
-        "builder": "NIXPACKS"
+        "builder": "NIXPACKS",
+        "buildCommand": "playwright install"
     },
     "deploy": {
         "startCommand": "PYTHONPATH=app gunicorn app.main:app",
