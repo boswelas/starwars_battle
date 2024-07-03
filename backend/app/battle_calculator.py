@@ -2,6 +2,7 @@ from character import Character
 import random
 
 def battle(character1_data, character2_data):
+    print(f"in the battle function")
     character1 = Character(
         name=character1_data[1],
         image=character1_data[2],
@@ -13,6 +14,7 @@ def battle(character1_data, character2_data):
         acc=character1_data[8],
         eva=character1_data[9]
     )
+    print(f"made Character 1: ", character1.name)
     character2 = Character(
         name=character2_data[1],
         image=character2_data[2],
@@ -24,6 +26,8 @@ def battle(character1_data, character2_data):
         acc=character2_data[8],
         eva=character2_data[9]
     )
+    print(f"made Character 2: ", character2.name)
+
     battle_play = []
     battle_play.append(f"Battle between {character1.name} and {character2.name}.")
 

@@ -16,7 +16,6 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 DATABASE_HOST = os.getenv('DB_HOST')
-# DATABASE_PORT = os.getenv('DB_PORT')
 DATABASE_PORT = 55863
 DATABASE_NAME = os.getenv('DB_NAME')
 DATABASE_USER = os.getenv('DB_USER')
@@ -145,6 +144,7 @@ def get_battle():
 
         if not char2_data:
             return jsonify(error="Character2 not found"), 404
+        print(f"going to calculate battle")
         calculate_battle = battle(char1_data, char2_data)
         print(f"calculated battle: ", calculate_battle)
         battle_details = asyncio.run(chat_response(calculate_battle))
