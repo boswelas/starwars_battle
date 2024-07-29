@@ -13,7 +13,8 @@ from battle_calculator import battle
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
+
 
 DATABASE_HOST = os.getenv('DB_HOST')
 DATABASE_PORT = 55863
