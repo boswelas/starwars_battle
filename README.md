@@ -20,7 +20,6 @@
 -->
 
 <!-- PROJECT LOGO -->
-<br />
 <div align="center">
 <h1 align="center">Star Wars Character Battle</h1>
   <p align="center">
@@ -30,6 +29,7 @@
     <br />
     <br />
     <span>Check it out live at </span><a href="https://starwars-battle.vercel.app/">starwars-battle.vercel.app</a>
+      <br />
   </p>
 </div>
 
@@ -54,7 +54,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#problems-and-solutions">Problems and Solutions</a></li>
     <li><a href="#future-goals">Future Goals</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -74,13 +73,11 @@ Admittedly, this project was really an excuse just to make something goofy and l
 
 
 ### Built With
-
 * Python
 * Playwright
 * BeautifulSoup4
 * TypeScript
 * Next.js
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -139,23 +136,20 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Problems and Solutions
 ### The Problem
 <p>After deploying the project backend on Railway.app, I encountered a pretty common CORS no “Access-control-allow-origin” error. Initially, I assumed the error had to do with how my frontend was hosted on Vercel, so to begin trouble-shooting, I updated the CORS policy to allow all origins. When that and several other CORS-related changes didn’t work, I took to combing through the server logs.
-</p>
-<br>
-<p>After spending quite a bit of time deep in the logs, I found this line:
-</p>
-<br>
-<p>/opt/venv/lib/python3.11/site-packages/playwright/driver/node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /nix/store/p3ffjixpnfgkqh20nsrc13vrj3yfi0nj-gcc-13.2.0-lib/lib/libstdc++.so.6)
+  
+After spending quite a bit of time deep in the logs, I found this line:
+/opt/venv/lib/python3.11/site-packages/playwright/driver/node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /nix/store/p3ffjixpnfgkqh20nsrc13vrj3yfi0nj-gcc-13.2.0-lib/lib/libstdc++.so.6)
 </p>
 
 ### The Solution
 <p>The issue turned out to be a problem specific to using Playwright on Railway. Per existing threads, Railway support recommended using Browserless, which appeared to be a paid service. Other solutions I considered were switching to another web scraping tool or hosting the project backend elsewhere.
 
-However, the solution found <a href="#readme-top">here</a> was simpler.
+However, the solution found <a href="https://www.answeroverflow.com/m/1161366860705566924" target=”_blank” >here</a> was simpler.
 
 I created a railway.json file to build and deploy, and changed the Nixpacks version to an older version (1.14.0). 
 </p>
 
-<p align="right">(<a href="https://www.answeroverflow.com/m/1161366860705566924">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### What I Learned
 <p>CORS errors are most often caused by server misconfigurations, network issues, and incorrect URL or endpoints. However, there are also times when server or environment issues can manifest as CORS errors, even though the root cause is unrelated to CORS itself. 
@@ -168,20 +162,10 @@ In this case, the CORS error occurred because the server couldn't start properly
 
 <p>There are still a couple features I plan to implement in the future.
 
-Improve performance by storing character data in a database table so that only never-before-scraped characters need to be scraped in real time
-Craft a more engaging loading screen by displaying battle calculations in real time while loading the results page
+* Improve performance by storing character data in a database table so that only never-before-scraped characters need to be scraped in real time.
+* Craft a more engaging loading screen by displaying battle calculations in real time while loading the results page.
+
 </p>
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
