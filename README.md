@@ -61,7 +61,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+<summary>## About The Project</summary>
 
 Characters are selected on the main page, and users can read details about them that are scraped from https://starwars.fandom.com/ . Character stats used in battle are based on the Star Wars card game stats available on the fandom site, with some liberties taken to fill in missing pieces. The battle result is determined with an algorithm developed for the project. From there, the results are fed to the ChatGPT API, which creates a narrative specific to the battle.
 
@@ -72,7 +72,7 @@ Admittedly, this project was really an excuse just to make something goofy and l
 
 
 
-### Built With
+## Built With
 * Python
 * Playwright
 * BeautifulSoup4
@@ -149,13 +149,12 @@ However, the solution found <a href="https://www.answeroverflow.com/m/1161366860
 I created a railway.json file to build and deploy, and changed the Nixpacks version to an older version (1.14.0). 
 </p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### What I Learned
 <p>CORS errors are most often caused by server misconfigurations, network issues, and incorrect URL or endpoints. However, there are also times when server or environment issues can manifest as CORS errors, even though the root cause is unrelated to CORS itself. 
 
 In this case, the CORS error occurred because the server couldn't start properly due to a missing GLIBC_2.38 dependency, causing it to fail in responding to requests. When the server can't process requests correctly, it often doesn't send the expected CORS headers, leading the browser to mistakenly interpret the issue as a CORS error. By downgrading Nixpacks, I resolved the server's underlying issue, allowing it to respond correctly and eliminating the CORS error.
 </p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE GOALS -->
 ## Future Goals
@@ -164,8 +163,8 @@ In this case, the CORS error occurred because the server couldn't start properly
 
 * Improve performance by storing character data in a database table so that only never-before-scraped characters need to be scraped in real time.
 * Craft a more engaging loading screen by displaying battle calculations in real time while loading the results page.
-
 </p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
