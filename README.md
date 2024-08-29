@@ -62,15 +62,12 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<details>
-<summary>Read More</summary>
 Characters are selected on the main page, and users can read details about them that are scraped from https://starwars.fandom.com/ . Character stats used in battle are based on the Star Wars card game stats available on the fandom site, with some liberties taken to fill in missing pieces. The battle result is determined with an algorithm developed for the project. From there, the results are fed to the ChatGPT API, which creates a narrative specific to the battle.
 
-Admittedly, this project was really an excuse just to make something goofy and learn about web-scraping 
-(I succeeded on both!).
+Admittedly, this project was really an excuse just to make something goofy and learn about web-scraping (I succeeded on both!).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-</details>
+
 
 
 
@@ -127,9 +124,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+![til](./frontend/public/images/star_wars_demo.gif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
