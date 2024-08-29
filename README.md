@@ -22,12 +22,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/boswelas/starwars_battle">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-<h3 align="center">Star Wars Character Battle</h3>
-
+<h1 align="center">Star Wars Character Battle</h1>
   <p align="center">
     Star Wars Character Battle allows users to simulate battle between their favorite Star Wars characters and receive a personalized story about the battle. 
     <br />
@@ -37,7 +32,6 @@
     <span>Check it out live at </span><a href="https://starwars-battle.vercel.app/">starwars-battle.vercel.app</a>
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -58,7 +52,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#problems">Problems and Solutions</a></li>
+    <li><a href="#problems-and-solutions">Problems and Solutions</a></li>
+    <li><a href="#future-goals">Future Goals</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -155,12 +150,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ### The Solution
 <p>The issue turned out to be a problem specific to using Playwright on Railway. Per existing threads, Railway support recommended using Browserless, which appeared to be a paid service. Other solutions I considered were switching to another web scraping tool or hosting the project backend elsewhere.
 
-However, the solution found here was simpler.
+However, the solution found <a href="#readme-top">here</a> was simpler.
 
 I created a railway.json file to build and deploy, and changed the Nixpacks version to an older version (1.14.0). 
 </p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="https://www.answeroverflow.com/m/1161366860705566924">back to top</a>)</p>
 
 ### What I Learned
 <p>CORS errors are most often caused by server misconfigurations, network issues, and incorrect URL or endpoints. However, there are also times when server or environment issues can manifest as CORS errors, even though the root cause is unrelated to CORS itself. 
@@ -168,6 +163,14 @@ I created a railway.json file to build and deploy, and changed the Nixpacks vers
 In this case, the CORS error occurred because the server couldn't start properly due to a missing GLIBC_2.38 dependency, causing it to fail in responding to requests. When the server can't process requests correctly, it often doesn't send the expected CORS headers, leading the browser to mistakenly interpret the issue as a CORS error. By downgrading Nixpacks, I resolved the server's underlying issue, allowing it to respond correctly and eliminating the CORS error.
 </p>
 
+<!-- FUTURE GOALS -->
+## Future Goals
+
+<p>There are still a couple features I plan to implement in the future.
+
+Improve performance by storing character data in a database table so that only never-before-scraped characters need to be scraped in real time
+Craft a more engaging loading screen by displaying battle calculations in real time while loading the results page
+</p>
 
 <!-- CONTACT -->
 ## Contact
