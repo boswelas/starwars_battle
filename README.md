@@ -144,7 +144,7 @@ After spending quite a bit of time deep in the logs, I found this line:
 ### The Solution
 <p>The issue turned out to be a problem specific to using Playwright on Railway. Per existing threads, Railway support recommended using Browserless, which appeared to be a paid service. Other solutions I considered were switching to another web scraping tool or hosting the project backend elsewhere.
 
-However, the solution found <a href="https://www.answeroverflow.com/m/1161366860705566924" target=”_blank” >here</a> was simpler.
+However, the solution found <a href="https://www.answeroverflow.com/m/1161366860705566924" target=”blank” >here</a> was simpler.
 
 I created a railway.json file to build and deploy, and changed the Nixpacks version to an older version (1.14.0). 
 </p>
