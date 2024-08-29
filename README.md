@@ -71,7 +71,8 @@
 
 Characters are selected on the main page, and users can read details about them that are scraped from https://starwars.fandom.com/ . Character stats used in battle are based on the Star Wars card game stats available on the fandom site, with some liberties taken to fill in missing pieces. The battle result is determined with an algorithm developed for the project. From there, the results are fed to the ChatGPT API, which creates a narrative specific to the battle.
 
-Admittedly, this project was really an excuse just to make something goofy and learn about web-scraping (I succeeded on both!).
+Admittedly, this project was really an excuse just to make something goofy and learn about web-scraping 
+(I succeeded on both!).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -139,7 +140,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- PROBLEMS -->
+<!-- PROBLEMS AND SOLUTIONS -->
 ## Problems and Solutions
 ### The Problem
 <p>After deploying the project backend on Railway.app, I encountered a pretty common CORS no “Access-control-allow-origin” error. Initially, I assumed the error had to do with how my frontend was hosted on Vercel, so to begin trouble-shooting, I updated the CORS policy to allow all origins. When that and several other CORS-related changes didn’t work, I took to combing through the server logs.
@@ -152,20 +153,20 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 </p>
 
 ### The Solution
-<p>The issue turned out to be a problem specific to using Playwright on Railway. Per existing threads, Railway support recommended using Browserless, which appeared to be a paid service. Other solutions I considered were switching to another web scraping tool or hosting the project backend elsewhere.</p>
+<p>The issue turned out to be a problem specific to using Playwright on Railway. Per existing threads, Railway support recommended using Browserless, which appeared to be a paid service. Other solutions I considered were switching to another web scraping tool or hosting the project backend elsewhere.
+
+However, the solution found here was simpler.
+
+I created a railway.json file to build and deploy, and changed the Nixpacks version to an older version (1.14.0). 
+</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### What I Learned
+<p>CORS errors are most often caused by server misconfigurations, network issues, and incorrect URL or endpoints. However, there are also times when server or environment issues can manifest as CORS errors, even though the root cause is unrelated to CORS itself. 
 
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+In this case, the CORS error occurred because the server couldn't start properly due to a missing GLIBC_2.38 dependency, causing it to fail in responding to requests. When the server can't process requests correctly, it often doesn't send the expected CORS headers, leading the browser to mistakenly interpret the issue as a CORS error. By downgrading Nixpacks, I resolved the server's underlying issue, allowing it to respond correctly and eliminating the CORS error.
+</p>
 
 
 <!-- CONTACT -->
