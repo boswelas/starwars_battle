@@ -61,8 +61,8 @@
 
 
 <!-- ABOUT THE PROJECT -->
-<details>
 ## About The Project
+<details>
 <summary>Read More</summary>
 Characters are selected on the main page, and users can read details about them that are scraped from https://starwars.fandom.com/ . Character stats used in battle are based on the Star Wars card game stats available on the fandom site, with some liberties taken to fill in missing pieces. The battle result is determined with an algorithm developed for the project. From there, the results are fed to the ChatGPT API, which creates a narrative specific to the battle.
 
