@@ -84,37 +84,38 @@ Admittedly, this project was really an excuse just to make something goofy and l
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
   ```
+* python
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
-   ```
+#### Installing Backend
+1. Open the backend directory in a terminal.
+2. Set up a Python virtual environment:
+   * On Windows:
+  ```sh
+  python -m venv venv
+  ```
+   * On Mac:
+  ```sh
+  python -m venv env
+  ```
+3. Activate the virtual environment:
+* On Windows:
+  ```sh
+.\venv\Scripts\activate
+  ```
+* On MacOS:
+bash
+  ```sh
+source ./env/bin/activate
+  ```
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
