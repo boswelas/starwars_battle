@@ -137,24 +137,24 @@ Admittedly, this project was really an excuse just to make something goofy and l
     source ./env/bin/activate
     ```
 3. Run the initial web scraper:
-  ```sh
-  railway run python add_char_data.py
-  ```
+    ```sh
+    railway run python add_char_data.py
+    ```
 4. Run the main entry point:
-  ```sh
-  railway run python main.py
-  ```
+    ```sh
+    railway run python main.py
+    ```
 5. Visit http://localhost:5000/ 
 
 #### Installing & Running Frontend
 1. Set up the frontend environment:
-  ```sh
-  npm install
-  ```
+    ```sh
+    npm install
+    ```
 2. Run the development server:
-  ```sh
-  npm run dev
-  ```
+    ```sh
+    npm run dev
+    ```
 3. Visit http://localhost:3000/ to view the frontend.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
