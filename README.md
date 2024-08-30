@@ -92,14 +92,14 @@ Admittedly, this project was really an excuse just to make something goofy and l
 #### Installing Backend
 1. Open the backend directory in a terminal.
 2. Set up a Python virtual environment:
-   * On Windows:
+* On Windows:
   ```sh
   python -m venv venv
   ```
-   * On Mac:
-  ```sh
-  python -m venv env
-  ```
+* On Mac:
+```sh
+python -m venv env
+```
 3. Activate the virtual environment:
 * On Windows:
   ```sh
@@ -130,19 +130,19 @@ Admittedly, this project was really an excuse just to make something goofy and l
 2. Activate the virtual environment:
 * On Windows:
   ```sh
-.\venv\Scripts\activate
+  .\venv\Scripts\activate
   ```
 * On MacOS:
   ```sh
-source ./env/bin/activate
+  source ./env/bin/activate
   ```
 3. Run the initial web scraper:
   ```sh
-railway run python add_char_data.py
+  railway run python add_char_data.py
   ```
 4. Run the main entry point:
   ```sh
-railway run python main.py
+  railway run python main.py
   ```
 5. Visit http://localhost:5000/ 
 
