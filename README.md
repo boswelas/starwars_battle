@@ -53,7 +53,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#problems-and-solutions">Problems and Solutions</a></li>
     <li><a href="#future-goals">Future Goals</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -203,14 +202,6 @@ In this case, the CORS error occurred because the server couldn't start properly
 </p>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
