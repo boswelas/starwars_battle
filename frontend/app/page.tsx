@@ -24,40 +24,48 @@ export default function CharacterPage() {
   };
 
 
-const handleCloseInfoBox = () => {
-  setShowInfoBox(false);
-};
+  const handleCloseInfoBox = () => {
+    setShowInfoBox(false);
+  };
 
-return (
-  <div className='flex flex-col items-center h-screen max-w-screen overflow-y-scroll no-scrollbar 
+  return (
+    <div className='flex flex-col items-center h-screen max-w-screen overflow-y-scroll overflow-x-hidden no-scrollbar 
     bg-cover bg-center' style={{ backgroundImage: `url('/images/space.jpg')` }}>
-    <div className='flex flex-col items-center'>
-      <h1 className='mt-10 text-[#FFFF00] custom-heading'>
-        Star Wars
-      </h1>
-      <h2 className='text-xl mb-5 text-neutral-500 custom-heading2'>Character Battle</h2>
+      <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center justify-center'>
+          <h1 className='mt-10 text-[#FFFF00] custom-heading hidden sm:block'>
+            Star Wars
+          </h1>
+          <h1 className=' text-[#FFFF00] custom-heading sm:hidden'>
+            Star
+          </h1>
+          <h1 className='mt-[-.5em] mb-2 text-[#FFFF00] custom-heading sm:hidden'>
+            Wars
+          </h1>
+        </div>
+        <h2 className='text-xl mb-5 text-neutral-500 custom-heading2'>Character Battle</h2>
 
-      <div className='flex items-center justify-center'>
-        <Image src={'/images/x-wing.png'} height={30} width={30} alt="" className='mr-5 mt-2'></Image>
-        <button
-          className="mt-3 primary-btn h-10 text-lg bg-red-700 p-3 rounded-md w-28  flex items-center justify-center hover:bg-red-600"
-          onClick={handleBattle}
-        >
-          Battle
-        </button>
-        <Image src={'/images/tie-fighter.png'} height={30} width={30} alt="" className='ml-5 mt-2'></Image>
-      </div>
-      {error && <p className="text-red-600 mt-2 ">{error}</p>}
-      <div className='flex flex-row gap-36 mt-10'>
-        <SearchBar onSelect={setCharacter1} />
-        <SearchBar onSelect={setCharacter2} />
-      </div>
-      <div>
-        <InfoBox onClose={handleCloseInfoBox} />
-      </div>
+        <div className='flex items-center justify-center'>
+          <Image src={'/images/x-wing.png'} height={30} width={30} alt="" className='mr-5 mt-2'></Image>
+          <button
+            className="mt-3 primary-btn h-10 text-lg bg-red-700 p-3 rounded-md w-28  flex items-center justify-center hover:bg-red-600"
+            onClick={handleBattle}
+          >
+            Battle
+          </button>
+          <Image src={'/images/tie-fighter.png'} height={30} width={30} alt="" className='ml-5 mt-2'></Image>
+        </div>
+        {error && <p className="text-red-600 mt-2 ">{error}</p>}
+        <div className='flex flex-col sm:flex-row gap-10 sm:gap-36 mt-10'>
+          <SearchBar onSelect={setCharacter1} />
+          <SearchBar onSelect={setCharacter2} />
+        </div>
+        <div>
+          <InfoBox onClose={handleCloseInfoBox} />
+        </div>
 
 
+      </div>
     </div>
-  </div>
-);
+  );
 }

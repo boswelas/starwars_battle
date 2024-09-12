@@ -66,7 +66,7 @@ export default function BattlePage() {
         return <Loading />
     }
     return (
-        <div className='h-screen overflow-y-scroll no-scrollbar bg-cover bg-center' style={{ backgroundImage: `url('/images/space.jpg')` }}>
+        <div className='h-screen overflow-y-scroll overflow-x-hidden no-scrollbar bg-cover bg-center' style={{ backgroundImage: `url('/images/space.jpg')` }}>
             <div className='flex flex-col items-center' >
                 <div className='mb-10'>
                     <Link href={"/"}>
@@ -82,7 +82,7 @@ export default function BattlePage() {
                     </h1>
                     <h1 className='custom-heading2 lowercase'>{character1} and {character2}</h1>
                 </div>
-                <div className='grid grid-cols-2 gap-32 items-center items-justify mt-6'>
+                <div className='grid grid-cols-2 gap-10 sm:gap-32 items-center items-justify mt-6'>
                     <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
                         <div className={`flex items-center max-h-full justify-center ${character1 === isLoser ? 'opacity-40 filter grayscale' : ''}`}>
                             {char1Photo ? (<Image
@@ -127,14 +127,14 @@ export default function BattlePage() {
                         </div>
                     </div>
                 </div>
-                <div className="mt-10 mb-10 w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center bg-black">
+                <div className="mt-10 mb-10 w-[90%] sm:w-[80%] md:w-[60%] no-scrollbar overflow-y-scroll flex flex-col items-center bg-black">
                     <ul className="list-disc list-inside">
                         {battleDetails}
                     </ul>
                 </div>
 
             </div>
-            <div className='ml-[18rem] w-[60%] mb-10'>
+            <div className='ml-[10%] md:ml-[20%] w-[85%] sm:w-[75%] md:w-[55%] mb-[5%]'>
                 {showReference ? (
                     <div className='bg-black'>
                         <button className='text-red-600 text-sm' onClick={onClick}>

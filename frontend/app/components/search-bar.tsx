@@ -82,7 +82,7 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
                         </Autocomplete>
                     </div>
                     {loading ? (
-                        <div className='flex flex-col items-center justify-center mt-32 text-red-500 font-semibold animate-pulse'>
+                        <div className='h-[18rem] flex flex-col items-center justify-center text-red-500 font-semibold animate-pulse'>
                             <h2>Loading character...</h2>
                         </div>
                     ) : (
