@@ -49,7 +49,12 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
                     setLoading(true);
                     const result = await fetchCharacterDetails(selectedCharName);
                     setLoading(false);
-                    setCharacterDetails(result!.data);
+                    const parsedDetails = typeof result.data.details === 'string'
+                        ? JSON.parse(result.data.details)
+                        : result.data.details;
+
+                    setCharacterDetails({ ...result.data, details: parsedDetails });
+                    console.log("deets: ", parsedDetails)
                     const alt = await getCharImage(selectedCharName);
                     setAltImage(alt.data)
                     setError(null);

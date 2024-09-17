@@ -19,7 +19,7 @@ interface Props {
 export default function GetCharacterDetails({ characterDetails }: Props) {
     const { details, image_url } = characterDetails;
     const [viewDetails, setViewDetails] = useState(false);
-
+    console.log(details);
     const onClick = () => {
         setViewDetails(!viewDetails);
     };
