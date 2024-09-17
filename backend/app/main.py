@@ -1,4 +1,5 @@
 import asyncio
+import json
 from char_image_scrape import scrape_char_image
 from chat_response import chat_response
 from char_detail_scrape import get_char_details
@@ -102,13 +103,15 @@ def get_details():
       
         char_details = asyncio.run(get_char_details(char_name))
         if char_details:
+            details_serialized = json.dumps(char_details['details'])
+            image_url = char_details['image_url'] or ''
+
             cur.execute('INSERT INTO "characterdata" (name, details, image_url) VALUES (%s, %s, %s)',
-                        (char_name, char_details['details'], char_details['image_url']))
+                        (char_name, details_serialized, image_url))
             conn.commit()
             conn.close()
+
             return jsonify(data=char_details)
-        conn.close()
-        return jsonify(error="Character details not found"), 404
     return jsonify(error="No character name provided"), 400
 
 @app.route('/get_char_image', methods=['GET', 'OPTIONS'])
