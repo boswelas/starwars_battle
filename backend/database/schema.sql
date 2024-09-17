@@ -11,7 +11,7 @@ CREATE TABLE Character (
     eva INTEGER
 );
 
-CREATE TABLE CharacterData (
+CREATE TABLE characterdata (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
     details TEXT,

@@ -93,7 +93,7 @@ def get_details():
     if char_name:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        cur.execute('SELECT * FROM "CharacterData" WHERE name = %s', (char_name,))
+        cur.execute('SELECT * FROM "characterdata" WHERE name = %s', (char_name,))
         character = cur.fetchone()
 
         if character:
@@ -102,7 +102,7 @@ def get_details():
       
         char_details = asyncio.run(get_char_details(char_name))
         if char_details:
-            cur.execute('INSERT INTO "CharacterData" (name, details, image_url) VALUES (%s, %s, %s)',
+            cur.execute('INSERT INTO "characterdata" (name, details, image_url) VALUES (%s, %s, %s)',
                         (char_name, char_details['details'], char_details['image_url']))
             conn.commit()
             conn.close()
