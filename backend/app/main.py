@@ -99,7 +99,7 @@ def get_details():
 
         if character:
             conn.close()
-            return jsonify(data=char_details)
+            return jsonify(data=character)
       
         char_details = asyncio.run(get_char_details(char_name))
         if char_details:
