@@ -10,3 +10,10 @@ CREATE TABLE Character (
     acc INTEGER,
     eva INTEGER
 );
+
+CREATE TABLE CharacterData (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    details TEXT,
+    image_url TEXT
+);

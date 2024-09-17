@@ -91,9 +91,23 @@ def get_details():
         return '', 204 
     char_name = request.args.get('char_name')
     if char_name:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cur.execute('SELECT * FROM "CharacterData" WHERE name = %s', (char_name,))
+        character = cur.fetchone()
+
+        if character:
+            conn.close()
+            return jsonify(data=char_details)
+      
         char_details = asyncio.run(get_char_details(char_name))
         if char_details:
+            cur.execute('INSERT INTO "CharacterData" (name, details, image_url) VALUES (%s, %s, %s)',
+                        (char_name, char_details['details'], char_details['image_url']))
+            conn.commit()
+            conn.close()
             return jsonify(data=char_details)
+        conn.close()
         return jsonify(error="Character details not found"), 404
     return jsonify(error="No character name provided"), 400
 
@@ -159,6 +173,8 @@ def get_scrape_image():
             return jsonify(data=image)
         return jsonify(error="Character details not found"), 404
     return jsonify(error="No character name provided"), 400
+
+
 
 # if __name__ == '__main__':
 #     app.run(debug=True, host='0.0.0.0')
