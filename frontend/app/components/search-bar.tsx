@@ -49,11 +49,16 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
                     setLoading(true);
                     const result = await fetchCharacterDetails(selectedCharName);
                     setLoading(false);
-                    console.log("result.data.details: ", result.data.details)
-                    const parsedDetails = typeof result.data.details === 'string'
-                        ? JSON.parse(result.data.details)
-                        : result.data.details;
-
+                    console.log("result.data.details: ", result.data.details);
+                    let parsedDetails;
+                    if (result.data.details === 'Details unavailable') {
+                        console.log("Result: Details unavailable");
+                        parsedDetails = result.data.details;
+                    }
+                    else {
+                        parsedDetails = JSON.parse(result.data.details);
+                    };
+                    console.log("parsed deets: ", parsedDetails);
                     setCharacterDetails({ ...result.data, details: parsedDetails });
                     console.log("deets: ", parsedDetails)
                     const alt = await getCharImage(selectedCharName);

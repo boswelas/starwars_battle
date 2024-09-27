@@ -14,8 +14,7 @@ from battle_calculator import battle
 load_dotenv()
 
 app = Flask(__name__)
-# CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "https://starwars-battle.vercel.app"}})
 
 DATABASE_HOST = os.getenv('DB_HOST')
 DATABASE_PORT = 55863
@@ -88,7 +87,6 @@ def fetch_character():
 
 @app.route('/get_char_deets', methods=['GET', 'OPTIONS'])
 def get_details():
-    print(f"in backend")
     if request.method == 'OPTIONS':
         return '', 204 
     char_name = request.args.get('char_name')
@@ -103,7 +101,6 @@ def get_details():
             return jsonify(data=character)
       
         char_details = asyncio.run(get_char_details(char_name))
-        print(f"char before condition: ", char_details)
         if char_details:
             details_serialized = json.dumps(char_details['details'])
             if char_details.get('image_url'):                
@@ -111,7 +108,10 @@ def get_details():
                 cur.execute('INSERT INTO "characterdata" (name, details, image_url) VALUES (%s, %s, %s)',
                             (char_name, details_serialized, image_url))
                 conn.commit()
+                cur.execute('SELECT * FROM "characterdata" WHERE name = %s', (char_name,))
+                character = cur.fetchone()
                 conn.close()
+                return jsonify(data=character)
             return jsonify(data=char_details)
     return jsonify(error="No character name provided"), 400
 
@@ -180,5 +180,5 @@ def get_scrape_image():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+# if __name__ == '__main__':
+#     app.run(debug=True, host='0.0.0.0')
