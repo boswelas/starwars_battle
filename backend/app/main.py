@@ -106,8 +106,8 @@ def get_details():
         print(f"char before condition: ", char_details)
         if char_details:
             details_serialized = json.dumps(char_details['details'])
-            image_url = char_details['image_url'] or ''
-            if image_url != '':
+            if char_details['image_url']:
+                image_url = char_details['image_url'] 
                 cur.execute('INSERT INTO "characterdata" (name, details, image_url) VALUES (%s, %s, %s)',
                             (char_name, details_serialized, image_url))
                 conn.commit()
