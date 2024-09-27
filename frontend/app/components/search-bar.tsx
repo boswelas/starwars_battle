@@ -49,6 +49,7 @@ export default function SearchBar({ onSelect }: SearchBarProps) {
                     setLoading(true);
                     const result = await fetchCharacterDetails(selectedCharName);
                     setLoading(false);
+                    console.log("result.data.details: ", result.data.details)
                     const parsedDetails = typeof result.data.details === 'string'
                         ? JSON.parse(result.data.details)
                         : result.data.details;

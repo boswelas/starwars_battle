@@ -79,6 +79,7 @@ export const fetchCharacterDetails = async (char_name: string): Promise<any> => 
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        console.log("data: ", data);
         return data;
     } catch (error) {
         console.error('Error fetching all characters:', error);
