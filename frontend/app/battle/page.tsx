@@ -84,7 +84,7 @@ export default function BattlePage() {
                 </div>
                 <div className='grid grid-cols-2 gap-10 sm:gap-32 items-center items-justify mt-6'>
                     <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
-                        <div className={`flex items-center max-h-full justify-center ${character1 === isLoser ? 'opacity-40 filter grayscale' : ''}`}>
+                        <div className={`flex items-center max-h-full justify-center ${character1 === isLoser ? 'opacity-25 filter grayscale' : ''}`}>
                             {char1Photo ? (<Image
                                 src={char1Photo!}
                                 alt="Character Image"
@@ -106,7 +106,7 @@ export default function BattlePage() {
                         </div>
                     </div>
                     <div className='flex flex-col items-center justify-center h-[18rem] overflow-hidden'>
-                        <div className={`flex items-center max-h-full justify-center ${character2 === isLoser ? 'opacity-40 filter grayscale' : ''}`}>
+                        <div className={`flex items-center max-h-full justify-center ${character2 === isLoser ? 'opacity-25 filter grayscale' : ''}`}>
                             {char2Photo ? (<Image
                                 src={char2Photo!}
                                 alt="Character Image"
