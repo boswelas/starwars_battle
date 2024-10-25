@@ -32,6 +32,7 @@ async def get_char_data():
                 acc = details[8].text.strip() if len(details) > 8 else None
                 eva = details[9].text.strip() if len(details) > 9 else None
                 
+                # Remove any part of name in brackets
                 cleaned_name = re.sub(r'\[.*?\]', '', name).strip()
 
                 # Check that all values are the correct type 

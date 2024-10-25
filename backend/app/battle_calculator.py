@@ -60,8 +60,8 @@ def battle(character1_data, character2_data):
         if attacker.attack_hits(defender):
             damage = max(0, attacker.effective_attack() - defender.effective_defense())
             critical_hit = random.random() < 0.1  # 10% chance of critical hit
-            if critical_hit:
-                damage *= 1.5
+            if damage > 0 and critical_hit:
+                damage *= 2.0
                 battle_play.append(f"Critical hit!")
             defender.take_damage(damage)
             battle_play.append(f"{attacker.name} hits {defender.name} for {damage:.2f} damage. {defender.name}'s health is now {defender.health:.2f}.")

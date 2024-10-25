@@ -22,7 +22,7 @@ class Character:
         return random.uniform(self.base_def, self.max_def)
 
     def attack_hits(self, opponent):
-        # Calculate hit chance based on accuracy and opponent's evasion with some randomness
+        # Calculate hit chance based on accuracy and opponent's evasion plus some randomness
         hit_chance = self.acc - opponent.eva + random.uniform(-10, 10)
         return random.uniform(0, 100) < hit_chance
 
@@ -35,6 +35,7 @@ class Character:
         return 0.5 * self.acc + 0.5 * self.eva
 
     def calculate_health(self):
+        # Weighted by importance
         alpha = 1.0
         beta = 0.5
         gamma = 0.2
